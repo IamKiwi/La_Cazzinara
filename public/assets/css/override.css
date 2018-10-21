@@ -1,0 +1,88 @@
+#banner
+{
+    background-image: url("../../images/Pizza.jpg") !important;
+}
+
+.button.special.green
+{
+    background-color: #27ED00;
+}
+
+.button.special.green:hover
+{
+    background-color: #05CB00 !important;
+}
+
+.button.special.red
+{
+    background-color: #ed4933;
+}
+
+.button.special.red:hover
+{
+    background-color: #cb2711 !important;
+}
+
+.button.special.white
+{
+    background-color: #FFFFFF;
+    color: #000; !important;
+}
+
+.button.special.white:hover
+{
+    background-color: #DDDDDD !important;
+    color: #000; !important;
+}
+
+.spotlight.wooden
+{
+    background-image: url("../../images/wooden_table.jpg");
+    background-size: cover;
+}
+
+#menu
+{
+    background-color: #4b3027;
+}
+
+#menu ul li:hover
+{
+    color: #000;
+}
+
+#header
+{
+    background-color: #4b3027;
+}
+
+.shadowy
+{
+    text-shadow: 1px 1px #DDDDDD;
+}
+
+/*
+=========================================================================
+This pattern is downloaded from www.toptal.com/designers/subtlepatterns/
+If you need more, that's where to get'em.
+========================================================================
+*/
+.wooden-back
+{
+    background-image: url("../../images/light-veneer.png") !important;
+}
+/*
+=========================================================================
+This pattern is downloaded from www.toptal.com/designers/subtlepatterns/
+If you need more, that's where to get'em.
+========================================================================
+*/
+.dark-back
+{
+    background-image: url("../../images/dark_wall.png") !important;
+}
+
+.promo
+{
+    background-image: url("../../images/promo.jpg") !important;
+}
