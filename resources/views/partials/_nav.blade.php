@@ -7,7 +7,7 @@
                 <div id="menu">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li><a href="#">Zobacz Menu</a></li>
+                        <li><a href="/pizzalist">Zobacz Menu</a></li>
                         <li><a href="#cta">Zamów online</a></li>
                         <li><a href="/register">Zarejestruj się</a></li>
                         <li><a href="/login">Zaloguj się</a></li>
