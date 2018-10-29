@@ -24,9 +24,8 @@ class PagesController
 
     public function getPizzaList()
     {
-        $pizza = DB::table('Pizza')->get();
+        $pizza = Pizza::all();
 
-//        return view('pages.pizzalist', ['pizza' => $pizza]);
         return view('pages.pizzalist')->with('pizza', $pizza);
     }
 }
