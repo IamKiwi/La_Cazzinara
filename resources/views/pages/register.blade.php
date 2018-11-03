@@ -2,7 +2,7 @@
 @section('title', 'Rejestracja')
 @section('content')
     <article id="main">
-        <section class="wrapper style5">
+        <section class="wrapper style5 wooden-back">
             <div class="inner">
                 <section>
                     <header>
@@ -55,7 +55,7 @@
                                     <br>
                                     <li><input type="submit" value="Zarejestruj się" class="button special green" /></li>
                                     <li><input type="reset" value="Wyczyść" /></li>
-                                    <li><a href="/" class="button special red">Powrót</a></li>
+                                    <li><a href="/" class="button special red fix-margin-top">Powrót</a></li>
                                 </ul>
                             </div>
                         </div>

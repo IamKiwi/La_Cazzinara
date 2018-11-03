@@ -86,3 +86,52 @@ If you need more, that's where to get'em.
 {
     background-image: url("../../images/promo.jpg") !important;
 }
+
+a
+{
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover
+{
+    text-decoration: none;
+    color: #fff;
+}
+
+.center-pagination
+{
+    text-align: center;
+}
+
+.fix-left-margin
+{
+    margin-left: -35px;
+}
+
+.fix-margin-top
+{
+    margin-top: 6px;
+}
+
+.pagination>.active>span
+{
+    background-color: #16DE00;
+    border-color: #16DE00;
+}
+
+.pagination>.active>span:hover
+{
+    background-color: #16DE00;
+    border-color: #16DE00;
+}
+
+.pagination > li > a
+{
+    color: #16DE00;
+}
+
+.pagination > li > a:hover
+{
+    color: #16DE00;
+}

@@ -24,8 +24,7 @@ class PagesController
 
     public function getPizzaList()
     {
-        $pizza = Pizza::all();
-
+        $pizza = Pizza::paginate(5);
         return view('pages.pizzalist')->with('pizza', $pizza);
     }
 
