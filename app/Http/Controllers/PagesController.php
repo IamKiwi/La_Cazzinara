@@ -28,4 +28,9 @@ class PagesController
 
         return view('pages.pizzalist')->with('pizza', $pizza);
     }
+
+    public function getGodMode()
+    {
+        return view('pages.godmode');
+    }
 }

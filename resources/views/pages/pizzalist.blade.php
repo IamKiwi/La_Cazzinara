@@ -1,7 +1,6 @@
 @extends('main')
 
 @section('title', 'Nasze menu')
-
 @section('content')
     <article id="main">
         <section class="wrapper style5 wooden-back">
