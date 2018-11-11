@@ -17,5 +17,7 @@ Route::get('/register', 'PagesController@getRegister');
 Route::get('/pizzalist', 'PagesController@getPizzaList');
 
 Route::get('/admin', 'AdminController@getAdminPanel');
+Route::get('/pizzaedit', 'AdminController@getPizzaEdit');
+Route::get('/userlist', 'AdminController@getUserList');
 
 Route::get('/debug', 'PagesController@getGodMode');

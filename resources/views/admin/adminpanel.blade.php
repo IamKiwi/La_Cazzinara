@@ -16,8 +16,8 @@
                 <div class="row">
                     <div class="12u">
                         <ul class="actions vertical">
-                            <li><a href="#" class="button fit">Zarządzanie pizzami</a></li>
-                            <li><a href="#" class="button fit">Zarządzanie użytkownikami</a></li>
+                            <li><a href="/pizzaedit" class="button fit">Zarządzanie pizzami</a></li>
+                            <li><a href="/userlist" class="button fit">Zarządzanie użytkownikami</a></li>
                             <li><a href="#" class="button fit">Bieżące zamówienia</a></li>
                             <li><a href="#" class="button fit">Podsumowanie finansowe</a></li>
                             <li><a href="#" class="button fit">Feedback</a></li>
