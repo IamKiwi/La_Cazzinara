@@ -11,7 +11,7 @@
             </p>
 
             <ul class="actions">
-                <li><a href="/pizzalist" class="button special green">Zobacz Menu</a></li>
+                <li><a href="{{ route('pages.pizzalist') }}" class="button special green">Zobacz Menu</a></li>
                 <li><a href="#cta" class="button special white scrolly">Zamów Online</a></li>
                 <li><a href="/register" class="button special">Zarejestruj się</a></li>
             </ul>

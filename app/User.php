@@ -29,4 +29,5 @@ class User extends Authenticatable
     ];
 
     protected $table = 'User';
+    protected $primaryKey = 'ID_User';
 }

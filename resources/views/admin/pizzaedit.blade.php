@@ -1,67 +1,43 @@
 @extends('main')
+@section('title', 'Edycja pizzy')
 
-@section('title', 'Zarządzanie pizzami')
 @section('content')
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+    <!-- Main -->
     <article id="main">
         <section class="wrapper style5">
             <div class="inner">
                 <section>
-                    <header>
-                        <h4>Panel Administratora</h4>
-                        <h5>Pizze</h5>
-                        <p>Dodawaj, edytuj, usuwaj pizze</p>
-                        <hr>
-                    </header>
-                </section>
-                <section>
-                    <form id="searchForm">
+                    <form method="post" action="#">
+                        <h4>Dodaj / edytuj pizze</h4>
                         <div class="row uniform">
-                            <div class="3u 12u$(xsmall)">
-                                <input type="text" name="pizzaSearch" placeholder="Nazwa pizzy" value="" />
+                            <div class="12u">
+                                <input type="text" name="nazwa" id="nazwa" value="{{ $pizza->Nazwa }}" placeholder="Nazwa" />
                             </div>
-                            <div class="3u 12u$(xsmall)">
-                                <button type="submit">Szukaj</button>
+                            <div class="6u 12u$(xsmall)">
+                                <input type="text" name="cena_m" id="cena_m" value="{{ $pizza->Cena_mala }}" placeholder="Cena mała" />
+                            </div>
+                            <div class="6u 12u$(xsmall)">
+                                <input type="text" name="cena_d" id="cena_d" value="{{ $pizza->Cena_duza }}" placeholder="Cena duża" />
+                            </div>
+                            <div class="12u">
+                                <input type="text" name="skladniki" id="skladniki" value="{{ $pizza->Skladniki }}" placeholder="Skladniki" />
+                                <input type="hidden" name="id" value="{{ $pizza->ID_Pizza }}">
+                            </div>
+                            <div class="12u$">
+                                <ul class="actions">
+                                    <br>
+                                    <li><input type="submit" value="Zapisz" class="button special green" /></li>
+                                    <li><input type="reset" value="Wyczyść" class="button"/></li>
+                                    <li><a href="/admin" class="button special fix-margin-top">Powrót</a></li>
+                                </ul>
                             </div>
                         </div>
                     </form>
-                    <div class="table-wrapper">
-                        <h4>Nasze pizze</h4>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Nazwa</th>
-                                <th>Składniki</th>
-                                <th>Mała (35cm)</th>
-                                <th>Duża (50cm)</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($pizza as $p)
-                            <tr>
-                                <td>{{$p->Nazwa}}</td>
-                                <td>{{$p->Skladniki}}</td>
-                                <td>{{$p->Cena_mala}}</td>
-                                <td>{{$p->Cena_duza}}</td>
-                                <td><a href="#" class="btn btn-default btn-sm">Edytuj</a></td>
-                                <td><a href="#" class="btn btn-default btn-sm">Usuń</a></td>
-                            </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        <div class="text-center">
-                            {!! $pizza->links() !!}
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <div class="row uniform">
-                        <ul class="actions">
-                            <li><a href="#" class="button special green">Dodaj nową pizze</a></li>
-                            <li><a href="/admin" class="button special">Powrót</a></li>
-                        </ul>
-                    </div>
                 </section>
             </div>
         </section>
     </article>
+</div>
 @endsection

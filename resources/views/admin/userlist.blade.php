@@ -23,9 +23,8 @@
                                 <div class="8u 12u$(xsmall)">
                                     <button type="submit">Szukaj</button>
                                 </div>
+                            </div>
                         </form>
-
-                    </div>
                     <div class="table-wrapper">
                         <h4>Nasze pizze</h4>
                         <table class="table lower-font">
@@ -54,12 +53,13 @@
                                 <td>{{ $p->Rola }}</td>
                                 <td>{{ $p->Last_mod }}</td>
                                 <td>{{ $p->ID_Edytora }}</td>
-                                <td><a href="#" class="btn btn-default btn-sm">Edytuj</a></td>
-                                <td><a href="#" class="btn btn-default btn-sm">Usuń</a></td>
+                                <td><a href="{{ route('admin.useredit', $p->ID_User) }}" class="btn btn-info btn-sm">Edytuj</a></td>
+                                <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
                             </tr>
                             @endforeach
                             </tbody>
                         </table>
+                    </div>
                     </div>
                 </section>
                 <section>

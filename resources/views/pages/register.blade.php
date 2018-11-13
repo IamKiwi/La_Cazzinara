@@ -22,6 +22,16 @@
                                 <input type="text" name="nazwisko" id="nazwisko" value="" placeholder="Nazwisko" />
                             </div>
                             <div class="6u 12u$(xsmall)">
+                                <select name="plec">
+                                    <option>-- Płeć --</option>
+                                    <option value="m">Mężczyzna</option>
+                                    <option value="k">Kobieta</option>
+                                </select>
+                            </div>
+                            <div class="6u 12u$(xsmall)">
+                                <input type="text" name="data_ur" id="data_ur" value="" placeholder="Data urodzenia (DD/MM/RRRR)" />
+                            </div>
+                            <div class="6u 12u$(xsmall)">
                                 <input type="email" name="mail" id="mail" value="" placeholder="Mail" />
                             </div>
                             <div class="6u 12u$(xsmall)">

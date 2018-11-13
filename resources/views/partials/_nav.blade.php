@@ -1,12 +1,12 @@
 <header id="header" class="@yield('alt')">
-    <h1><a href="index.html">@yield('title')</a></h1>
+    <h1>@yield('title')</h1>
     <nav id="nav">
         <ul>
             <li class="special">
                 <a href="#menu" class="menuToggle"><span>Menu</span></a>
                 <div id="menu">
                     <ul>
-                        @if(Request::is('admin'))
+                        @if(Request::is('admin*'))
                             <li><a href="#">Zarządzanie pizzami</a></li>
                             <li><a href="#">Zarządzanie użytkownikami</a></li>
                             <li><a href="#">Bieżące zamówienia</a></li>
