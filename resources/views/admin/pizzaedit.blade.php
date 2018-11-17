@@ -9,28 +9,37 @@
         <section class="wrapper style5">
             <div class="inner">
                 <section>
-                    <form method="post" action="#">
+                    <form method="post" action="{{ empty($pizza->id) ? route('admin.savepizza') : route('admin.updatepizza', $pizza->id)}}">
+                        @csrf
                         <h4>Dodaj / edytuj pizze</h4>
                         <div class="row uniform">
                             <div class="12u">
-                                <input type="text" name="nazwa" id="nazwa" value="{{ $pizza->Nazwa }}" placeholder="Nazwa" />
+                                <input type="text" name="name"
+                                       value="{{ empty($pizza->name) ? "" : $pizza->name }}" placeholder="Nazwa" />
                             </div>
-                            <div class="6u 12u$(xsmall)">
-                                <input type="text" name="cena_m" id="cena_m" value="{{ $pizza->Cena_mala }}" placeholder="Cena mała" />
+                            <div class="4u 12u$(xsmall)">
+                                <input type="text" name="price_small"
+                                       value="{{ empty($pizza->price_small) ? "" : $pizza->price_small }}" placeholder="Cena mała" />
                             </div>
-                            <div class="6u 12u$(xsmall)">
-                                <input type="text" name="cena_d" id="cena_d" value="{{ $pizza->Cena_duza }}" placeholder="Cena duża" />
+                            <div class="4u 12u$(xsmall)">
+                                <input type="text" name="price_medium"
+                                       value="{{ empty($pizza->price_medium) ? "" : $pizza->price_medium }}" placeholder="Cena średnia" />
+                            </div>
+                            <div class="4u 12u$(xsmall)">
+                                <input type="text" name="price_large"
+                                       value="{{ empty($pizza->price_large) ? "" : $pizza->price_large }}" placeholder="Cena duża" />
                             </div>
                             <div class="12u">
-                                <input type="text" name="skladniki" id="skladniki" value="{{ $pizza->Skladniki }}" placeholder="Skladniki" />
-                                <input type="hidden" name="id" value="{{ $pizza->ID_Pizza }}">
+                                <input type="text" name="ingredients"
+                                       value="{{ empty($pizza->ingredients) ? "" : $pizza->ingredients}}" placeholder="Skladniki" />
+                                <input type="hidden" name="id" value="{{ empty($pizza->id) ? "" : $pizza->id}}">
                             </div>
                             <div class="12u$">
                                 <ul class="actions">
                                     <br>
                                     <li><input type="submit" value="Zapisz" class="button special green" /></li>
                                     <li><input type="reset" value="Wyczyść" class="button"/></li>
-                                    <li><a href="/admin" class="button special fix-margin-top">Powrót</a></li>
+                                    <li><a href="{{route('admin.pizzalist')}}" class="button special fix-margin-top">Powrót</a></li>
                                 </ul>
                             </div>
                         </div>

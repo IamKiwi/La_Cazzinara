@@ -14,6 +14,7 @@
                     </header>
                 </section>
                 <section>
+                    @include('partials._messages')
                     <form id="searchForm">
                         <div class="row uniform">
                             <div class="3u 12u$(xsmall)">
@@ -26,7 +27,7 @@
                     </form>
                     <div class="table-wrapper">
                         <h4>Nasze pizze</h4>
-                        <table>
+                        <table class="table lower-font">
                             <thead>
                             <tr>
                                 <th>Nazwa</th>
@@ -38,12 +39,12 @@
                             <tbody>
                             @foreach($pizza as $p)
                             <tr>
-                                <td>{{$p->Nazwa}}</td>
-                                <td>{{$p->Skladniki}}</td>
-                                <td>{{$p->Cena_mala}}</td>
-                                <td>{{$p->Cena_duza}}</td>
-                                <td><a href="{{ route('admin.pizzaedit', $p->ID_Pizza) }}" class="btn btn-info btn-sm">Edytuj</a></td>
-                                <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
+                                <td>{{$p->name}}</td>
+                                <td>{{$p->ingredients}}</td>
+                                <td>{{$p->price_small}}</td>
+                                <td>{{$p->price_large}}</td>
+                                <td><a href="{{ route('admin.pizzaedit', $p->id) }}" class="btn btn-info btn-sm">Edytuj</a></td>
+                                <td><a href="{{ route('admin.pizzadelete', $p->id) }}" class="btn btn-danger btn-sm">Usuń</a></td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -56,8 +57,8 @@
                 <section>
                     <div class="row uniform">
                         <ul class="actions">
-                            <li><a href="#" class="button special green">Dodaj nową pizze</a></li>
-                            <li><a href="/admin" class="button special fix-margin-top">Powrót</a></li>
+                            <li><a href="{{route('admin.addpizza')}}" class="button special green">Dodaj nową pizze</a></li>
+                            <li><a href="/admin" class="button special">Powrót</a></li>
                         </ul>
                     </div>
                 </section>

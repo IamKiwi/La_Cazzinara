@@ -22,10 +22,10 @@
                                 <tbody>
                                 @foreach($pizza as $p)
                                     <tr>
-                                        <td>{{$p->Nazwa}}</td>
-                                        <td>{{$p->Skladniki}}</td>
-                                        <td>{{$p->Cena_mala}}</td>
-                                        <td>{{$p->Cena_duza}}</td>
+                                        <td>{{$p->name}}</td>
+                                        <td>{{$p->ingredients}}</td>
+                                        <td>{{$p->price_small}}</td>
+                                        <td>{{$p->price_large}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

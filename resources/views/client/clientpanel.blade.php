@@ -10,7 +10,7 @@
                 <div class="inner">
                     <section>
                         <header>
-                            <h2>Witaj {{ $user->Imie }}</h2>
+                            <h2>Witaj {{ Auth::user()->name }}</h2>
                         </header>
                     </section>
                     <section>
@@ -20,7 +20,7 @@
                                     <li><a href="#" class="button fit">Zamów</a></li>
                                     <li><a href="#" class="button fit">Edytuj Profil</a></li>
                                     <li><a href="#" class="button fit">Historia zamówień</a></li>
-                                    <li><a href="#" class="button fit">Wyloguj</a></li>
+                                    <li><a href="{{ route('logout') }}" class="button fit">Wyloguj</a></li>
                                 </ul>
                             </div>
                         </div>

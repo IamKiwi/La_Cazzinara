@@ -44,16 +44,16 @@
                             <tbody>
                             @foreach ($users as $p)
                             <tr>
-                                <td>{{ $p->ID_User }}</td>
-                                <td>{{ $p->Mail }}</td>
-                                <td>{{ $p->Imie }}</td>
-                                <td>{{ $p->Nazwisko }}</td>
-                                <td>{{ $p->Adres }}</td>
-                                <td>{{ $p->Nr_tel }}</td>
-                                <td>{{ $p->Rola }}</td>
-                                <td>{{ $p->Last_mod }}</td>
-                                <td>{{ $p->ID_Edytora }}</td>
-                                <td><a href="{{ route('admin.useredit', $p->ID_User) }}" class="btn btn-info btn-sm">Edytuj</a></td>
+                                <td>{{ $p->id }}</td>
+                                <td>{{ $p->email }}</td>
+                                <td>{{ $p->name }}</td>
+                                <td>{{ $p->surname}}</td>
+                                {{--<td>{{ $p->Adres }}</td>--}}
+                                <td>{{ $p->phone_number }}</td>
+                                {{--<td>{{ $p->Rola }}</td>--}}
+                                {{--<td>{{ $p->Last_mod }}</td>--}}
+                                {{--<td>{{ $p->ID_Edytora }}</td>--}}
+                                <td><a href="{{ route('admin.useredit', $p->id) }}" class="btn btn-info btn-sm">Edytuj</a></td>
                                 <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
                             </tr>
                             @endforeach

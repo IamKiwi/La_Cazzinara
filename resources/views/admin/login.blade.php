@@ -1,5 +1,5 @@
 @extends('main')
-@section('title', 'Logowanie')
+@section('title', 'Logowanie Administratora')
 @section('content')
     <!-- Main -->
     <article id="main">
@@ -7,9 +7,7 @@
             <div class="inner">
                 <section>
                     <header>
-                        <h4>Zaloguj się</h4>
-                        <p>Zaloguj się na swoje konto</p>
-                        <p>Nie masz jeszcze konta? <a href="/register">Zarejestruj się</a></p>
+                        <h4>Logowanie Administratora</h4>
                         <hr>
                     </header>
                 </section>
@@ -21,7 +19,7 @@
                         @endforeach
                     </ul>
 
-                    <form method="post" action="{{route('login')}}">
+                    <form method="post" action="{{route('admin.login')}}">
                         @csrf
 
                         <h4>Logowanie</h4>

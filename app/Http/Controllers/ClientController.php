@@ -7,9 +7,13 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function getClientPanel($id)
+    public function __construct()
     {
-        $user = User::find($id);
-        return view('client.clientpanel')->with('user', $user);
+        $this->middleware('auth');
+    }
+
+    public function getClientPanel()
+    {
+        return view('client.clientpanel');
     }
 }

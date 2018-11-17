@@ -12,53 +12,58 @@
                     </header>
                 </section>
                 <section>
-                    <form method="post" action="#">
+                    @if ($errors->any())
+                        {{ implode('', $errors->all('<div>:message</div>')) }}
+                    @endif
+
+                    <form method="post" action="{{ route('register') }}">
+                        @csrf
                         <h4>Dane osobowe</h4>
                         <div class="row uniform">
                             <div class="6u 12u$(xsmall)">
-                                <input type="text" name="imie" id="imie" value="" placeholder="Imię" />
+                                <input type="text" name="name" value="" placeholder="Imię" />
                             </div>
                             <div class="6u 12u$(xsmall)">
-                                <input type="text" name="nazwisko" id="nazwisko" value="" placeholder="Nazwisko" />
+                                <input type="text" name="surname" value="" placeholder="Nazwisko" />
                             </div>
                             <div class="6u 12u$(xsmall)">
-                                <select name="plec">
+                                <select name="sex">
                                     <option>-- Płeć --</option>
                                     <option value="m">Mężczyzna</option>
                                     <option value="k">Kobieta</option>
                                 </select>
                             </div>
                             <div class="6u 12u$(xsmall)">
-                                <input type="text" name="data_ur" id="data_ur" value="" placeholder="Data urodzenia (DD/MM/RRRR)" />
+                                <input type="text" name="date_of_birth" value="" placeholder="Data urodzenia (DD/MM/RRRR)" />
                             </div>
                             <div class="6u 12u$(xsmall)">
-                                <input type="email" name="mail" id="mail" value="" placeholder="Mail" />
+                                <input type="email" name="email" value="" placeholder="Mail" />
                             </div>
                             <div class="6u 12u$(xsmall)">
-                                <input type="text" name="nr_tel" id="nr_tel" value="" placeholder="Nr telefonu" />
+                                <input type="text" name="phone_number" value="" placeholder="Nr telefonu" />
                             </div>
                             <div class="6u 12u$(xsmall)">
-                                <input type="password" name="haslo" id="haslo" value="" placeholder="Hasło" />
+                                <input type="password" name="password" value="" placeholder="Hasło" />
                             </div>
 
                             <div class="6u 12u$(xsmall)">
-                                <input type="password" name="haslo_confirm" id="haslo_confirm" value="" placeholder="Powtórz Hasło" />
+                                <input type="password" name="password_confirmation" value="" placeholder="Powtórz Hasło" />
                             </div>
 
                             <div class="12u$">
                                 <br><h4>Adres</h4>
                             </div>
                             <div class="6u 12u$(xsmall)">
-                                <input type="text" name="ulica" id="ulica" value="" placeholder="Ulica" />
+                                <input type="text" id="ulica" value="" placeholder="Ulica" />
                             </div>
                             <div class="6u 12u$(xsmall)">
-                                <input type="text" name="nr_lok" id="nr_lok" value="" placeholder="Nr domu / mieszkania" />
+                                <input type="text" id="nr_lok" value="" placeholder="Nr domu / mieszkania" />
                             </div>
                             <div class="6u 12u$(xsmall)">
-                                <input type="text" name="miasto" id="miasto" value="" placeholder="Miasto" />
+                                <input type="text" id="miasto" value="" placeholder="Miasto" />
                             </div>
                             <div class="6u 12u$(xsmall)">
-                                <input type="text" name="zipcode" id="zipcode" value="" placeholder="Kod pocztowy" />
+                                <input type="text" id="zipcode" value="" placeholder="Kod pocztowy" />
                             </div>
                             <div class="12u$">
                                 <ul class="actions">
