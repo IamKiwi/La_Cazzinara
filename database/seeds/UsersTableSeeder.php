@@ -18,7 +18,11 @@ class UsersTableSeeder extends Seeder
             'surname' => 'Beam',
             'email' => 'jim@beam.com',
             'password' => Hash::make('qazwsx'),
-            'phone_number' => '666999666'
+            'address' => 'Lwowska, 69, Sosnowiec, 41-205',
+            'sex' => 'm',
+            'phone_number' => '666999666',
+            'created_at' => Carbon\Carbon::now(),
+            'updated_at' => Carbon\Carbon::now()
         ]);
 
         DB::table('users')->insert([
@@ -26,7 +30,23 @@ class UsersTableSeeder extends Seeder
             'surname' => 'Walker',
             'email' => 'john@walker.com',
             'password' => Hash::make('qwerty'),
-            'phone_number' => '666222666'
+            'address' => 'Kręta, 33, Sosnowiec, 41-200',
+            'sex' => 'm',
+            'phone_number' => '666222666',
+            'created_at' => Carbon\Carbon::now(),
+            'updated_at' => Carbon\Carbon::now()
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Morgan',
+            'surname' => 'Captain',
+            'email' => 'morgan@captain.com',
+            'password' => Hash::make('qwerty'),
+            'address' => 'Żeglarzy, 211/43, Sosnowiec, 41-200',
+            'sex' => 'm',
+            'phone_number' => '997997997',
+            'created_at' => Carbon\Carbon::now(),
+            'updated_at' => Carbon\Carbon::now()
         ]);
     }
 }

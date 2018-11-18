@@ -15,6 +15,7 @@
                 </section>
                 <section>
                     <div class="inner">
+                        @include('partials._messages')
                         <form id="searchForm">
                             <div class="row uniform">
                                 <div class="4u 12u$(xsmall)">
@@ -25,36 +26,52 @@
                                 </div>
                             </div>
                         </form>
-                    <div class="table-wrapper">
-                        <h4>Nasze pizze</h4>
-                        <table class="table lower-font">
+                    <div class="table-responsive">
+                        <h4>Użytkownicy</h4>
+                        <table class="table table-hover lower-font">
                             <thead>
                             <tr>
+                                <th></th>
                                 <th>ID</th>
                                 <th>Nazwa użytkownika (mail)</th>
                                 <th>Imię</th>
                                 <th>Nazwisko</th>
                                 <th>Adres</th>
                                 <th>Nr telefonu</th>
-                                <th>Rola w systemie</th>
-                                <th>Ostatnio modyfikowano</th>
-                                <th>Modyfikował</th>
+                                <th>Data urodzenia</th>
+                                <th>Status konta</th>
+                                <th>Data rejestracji</th>
+                                <th>Data ostatniej aktualizacji</th>
+                                <th>Data deaktywacji</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($users as $p)
                             <tr>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle glyphicon glyphicon-cog inverted" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <li><a href="{{ route('admin.useredit', $p->id) }}"
+                                                   class="borderless no-padding menu-blue">Edytuj</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#" class="borderless no-padding menu-red">Deaktywuj konto</a></li>
+                                            <li><a href="{{ route('admin.userdelete', $p->id) }}" class="borderless no-padding menu-red">Usuń</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
                                 <td>{{ $p->id }}</td>
                                 <td>{{ $p->email }}</td>
                                 <td>{{ $p->name }}</td>
                                 <td>{{ $p->surname}}</td>
-                                {{--<td>{{ $p->Adres }}</td>--}}
+                                <td>{{ $p->address}}</td>
                                 <td>{{ $p->phone_number }}</td>
-                                {{--<td>{{ $p->Rola }}</td>--}}
-                                {{--<td>{{ $p->Last_mod }}</td>--}}
-                                {{--<td>{{ $p->ID_Edytora }}</td>--}}
-                                <td><a href="{{ route('admin.useredit', $p->id) }}" class="btn btn-info btn-sm">Edytuj</a></td>
-                                <td><a href="#" class="btn btn-danger btn-sm">Usuń</a></td>
+                                <td>{{ !empty($p->date_of_birth) ? date('y-m-d', strtotime($p->date_of_birth)) : ""}}</td>
+                                <td>{{ $p->account_active }}</td>
+                                <td>{{ !empty($p->created_at) ? date('y-m-d H:i:s', strtotime($p->created_at)) : ""}}</td>
+                                <td>{{ !empty($p->updated_at) ? date('y-m-d H:i:s', strtotime($p->updated_at)) : ""}}</td>
+                                <td>{{ !empty($p->deactivated_at) ? date('y-m-d H:i:s', strtotime($p->deactivated_at)) : ""}}</td>
                             </tr>
                             @endforeach
                             </tbody>

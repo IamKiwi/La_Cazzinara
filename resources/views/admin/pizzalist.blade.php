@@ -33,7 +33,8 @@
                                 <th>Nazwa</th>
                                 <th>Składniki</th>
                                 <th>Mała (35cm)</th>
-                                <th>Duża (50cm)</th>
+                                <th>Średnia (45cm)</th>
+                                <th>Duża (60cm)</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -42,6 +43,7 @@
                                 <td>{{$p->name}}</td>
                                 <td>{{$p->ingredients}}</td>
                                 <td>{{$p->price_small}}</td>
+                                <td>{{$p->price_medium}}</td>
                                 <td>{{$p->price_large}}</td>
                                 <td><a href="{{ route('admin.pizzaedit', $p->id) }}" class="btn btn-info btn-sm">Edytuj</a></td>
                                 <td><a href="{{ route('admin.pizzadelete', $p->id) }}" class="btn btn-danger btn-sm">Usuń</a></td>

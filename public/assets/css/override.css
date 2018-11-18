@@ -140,3 +140,44 @@ a:hover
 {
     font-size: 12px;
 }
+
+.lowest-font
+{
+    font-size: 10px;
+}
+
+.borderless
+{
+    border-bottom: none;
+}
+
+.inverted
+{
+    color: #000;
+    border-bottom: none;
+}
+
+.inverted:hover
+{
+    color: #000;
+}
+
+ul li
+{
+    padding: 0;
+}
+
+.menu-blue
+{
+    color: #337ab7 !important;
+}
+
+.menu-red
+{
+    color: #cb2711 !important;
+}
+
+.open > .dropdown-menu
+{
+    display: inline-flex !important;
+}

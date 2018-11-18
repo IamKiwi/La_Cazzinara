@@ -1,3 +1,4 @@
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="{{ URL::asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ URL::asset('assets/js/jquery.scrollex.min.js') }}"></script>
@@ -6,4 +7,3 @@
 <script src="{{ URL::asset('assets/js/util.js') }}"></script>
 <!--[if lte IE 8]><script src="{{ URL::asset('assets/js/ie/respond.min.js') }}"></script><![endif]-->
 <script src="{{ URL::asset('assets/js/main.js') }}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

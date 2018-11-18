@@ -48,11 +48,40 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = [
+            'name.required' => 'Musisz podać swoje imię',
+            'name.max' => 'Imię jest zbyt długie',
+            'surname.required' => 'Musisz podać swoje nazwisko',
+            'surname.max' => 'Nazwisko jest zbyt długie',
+            'email.required' => 'Musisz podać adres e-mail',
+            'email.email' => 'Nieprawidłowy format adresu e-mail',
+            'email.max' => 'E-mail jest zbyt długi',
+            'email.unique' => 'Konto o podanym e-mailu już istnieje',
+            'password.required' => 'Musisz podać hasło',
+            'password.confirmed' => 'Musisz potwierdzić hasło',
+            'password.min' => 'Hasło musi składać się z conajmniej 6 znaków',
+            'phone_number.required' => 'Musisz podać numer telefonu',
+            'phone_number.digits_between' => 'Numer telefonu jest nieprawidłowy',
+            'phone_number.numeric' => 'Numer telefonu musi składać się z cyfr',
+            'date_of_birth.dateformat' => 'Data urodzenia musi mieć format RRRR-MM-DD',
+            'street.required' => 'Musisz podać ulicę',
+            'number.required' => 'Musisz podać numer domu/mieszkania',
+            'city.required' => 'Musisz podać miasto',
+            'zipcode.required' => 'Musisz podać kod pocztowy'
+        ];
+
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
+            'surname' => 'required|string|max:50',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-        ]);
+            'phone_number' => 'required|numeric|digits_between:8,10',
+            'date_of_birth' => 'nullable|dateformat:Y-m-d',
+            'street' => 'required|string',
+            'number' => 'required|string',
+            'city' => 'required|string',
+            'zipcode' => 'required|alpha_dash'
+        ], $messages);
     }
 
     /**
@@ -65,10 +94,13 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
             'surname' => $data['surname'],
-            'phone_number' => $data['phone_number'],
+            'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'phone_number' => $data['phone_number'],
+            'address' => $data['street'].', '.$data['number'].', '.$data['city'].', '.$data['zipcode'],
+            'sex' => $data['sex'],
+            'date_of_birth' => $data['date_of_birth'],
         ]);
     }
 }

@@ -18,6 +18,7 @@ Route::get('/pizzalist', 'PagesController@getPizzaList')->name('pages.pizzalist'
 Route::get('/register', 'PagesController@getRegister')->name('register');
 
 Route::get('/home', 'ClientController@getClientPanel')->name('client.panel');
+Route::get('/useredit/{id}', 'ClientController@getUserEdit')->name('client.update');
 
 Route::get('/login', 'PagesController@getLogin')->name('login');
 
@@ -35,7 +36,9 @@ Route::prefix('admin')->group(function ()
     Route::get('/deletepizza/{id}', 'AdminController@getDeletePizza')->name('admin.pizzadelete');
 
     Route::get('/userlist', 'AdminController@getUserList')->name('admin.userlist');
-    Route::get('useredit/{ID_User}', 'AdminController@getUserEdit')->name('admin.useredit');
+    Route::get('useredit/{id}', 'AdminController@getUserEdit')->name('admin.useredit');
+    Route::get('userdelete/{id}', 'AdminController@getDeleteUser')->name('admin.userdelete');
+    Route::post('/userupdate/{id}', 'AdminController@postUpdateUser')->name('admin.updateuser');
 
 });
 
