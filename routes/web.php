@@ -17,8 +17,10 @@ Route::get('/', 'PagesController@getIndex');
 Route::get('/pizzalist', 'PagesController@getPizzaList')->name('pages.pizzalist');
 Route::get('/register', 'PagesController@getRegister')->name('register');
 
-Route::get('/home', 'ClientController@getClientPanel')->name('client.panel');
-Route::get('/useredit/{id}', 'ClientController@getUserEdit')->name('client.update');
+Route::get('/home', 'ClientController@getClientPanel')->name('client.dashboard');
+
+Route::get('/useredit/{id}', 'ClientController@getUserEdit')->name('client.edit');
+Route::post('/userupdate/{id}', 'ClientController@postUpdateUser')->name('client.update');
 
 Route::get('/login', 'PagesController@getLogin')->name('login');
 

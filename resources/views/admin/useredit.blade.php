@@ -56,7 +56,7 @@
                                     <br>
                                     <li><input type="submit" value="Zapisz" class="button special green" /></li>
                                     <li><input type="reset" value="Wyczyść" /></li>
-                                    <li><a href="{{ route('admin.userlist') }}" class="button special red fix-margin-top">Powrót</a></li>
+                                    <li><a href="{{ route('admin.userlist') }}" class="button special red fix-margin-top">Anuluj</a></li>
                                 </ul>
                             </div>
                         </div>

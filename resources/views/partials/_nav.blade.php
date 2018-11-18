@@ -7,14 +7,16 @@
                 <div id="menu">
                     <ul>
                         @if(Auth::guard('admin')->check())
+                            <li><a href="{{ route('admin.dashboard') }}">Panel Administratora</a></li>
                             <li><a href="{{ route('admin.pizzalist') }}">Zarządzanie pizzami</a></li>
-                            <li><a href="#">Zarządzanie użytkownikami</a></li>
+                            <li><a href="{{ route('admin.userlist') }}">Zarządzanie użytkownikami</a></li>
                             <li><a href="#">Bieżące zamówienia</a></li>
                             <li><a href="#">Podsumowanie finansowe</a></li>
                             <li><a href="#">Feedback</a></li>
                             <li><a href="#">Statystyki</a></li>
                             <li><a href="{{ route('logout') }}">Wyloguj</a></li>
                         @elseif(Auth::guard('web')->check())
+                            <li><a href="{{route('client.dashboard')}}">Panel Klienta</a></li>
                             <li><a href="#">Zamów</a></li>
                             <li><a href="#">Edytuj profil</a></li>
                             <li><a href="{{ route('logout') }}">Wyloguj</a></li>

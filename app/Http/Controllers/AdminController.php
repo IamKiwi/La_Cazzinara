@@ -152,6 +152,7 @@ class AdminController extends Controller
         $user->surname = $request->surname;
         $user->phone_number = $request->phone_number;
         $user->email = $request->email;
+        $user->sex = $request->sex;
         $user->date_of_birth = $request->date_of_birth;
         $user->address = $request->street.', '.$request->number.', '.$request->city.', '.$request->zipcode;
         $user->save();

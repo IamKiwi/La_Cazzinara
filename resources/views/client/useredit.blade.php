@@ -14,7 +14,17 @@
                 <section>
                     @include('partials._messages')
 
-                    <form method="post" action="#">
+                    <div class="12u$">
+                        <h4>Zmiana hasła</h4>
+                        <p>Możesz zmienić swoje hasło klikając poniższy przycisk</p>
+                        <a href="#" class="button ">Zmień hasło</a>
+                    </div>
+
+                    <div class="12u$">
+                        <hr>
+                    </div>
+
+                    <form method="post" action="{{ route('client.update', Auth::id()) }}">
                         @csrf
                         <h4>Dane osobowe</h4>
                         <div class="row uniform">
@@ -40,13 +50,6 @@
                             <div class="6u 12u$(xsmall)">
                                 <input type="text" name="phone_number" value="{{ $user->phone_number }}" placeholder="Nr telefonu" />
                             </div>
-                            <div class="6u 12u$(xsmall)">
-                                <input type="password" name="password" value="" placeholder="Hasło" />
-                            </div>
-
-                            <div class="6u 12u$(xsmall)">
-                                <input type="password" name="password_confirmation" value="" placeholder="Powtórz Hasło" />
-                            </div>
 
                             <div class="12u$">
                                 <br><h4>Adres</h4>
@@ -63,12 +66,13 @@
                             <div class="6u 12u$(xsmall)">
                                 <input type="text" name="zipcode" value="{{ $user_addr['zipcode'] }}" placeholder="Kod pocztowy" />
                             </div>
+
                             <div class="12u$">
                                 <ul class="actions">
                                     <br>
                                     <li><input type="submit" value="Aktualizuj" class="button special green" /></li>
                                     <li><input type="reset" value="Wyczyść" /></li>
-                                    <li><a href="{{ route('client.panel') }}" class="button special red fix-margin-top">Powrót</a></li>
+                                    <li><a href="{{ route('client.dashboard') }}" class="button special red fix-margin-top">Anuluj</a></li>
                                 </ul>
                             </div>
                         </div>
