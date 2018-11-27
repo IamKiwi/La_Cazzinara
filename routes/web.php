@@ -21,6 +21,11 @@ Route::get('/home', 'ClientController@getClientPanel')->name('client.dashboard')
 
 Route::get('/useredit/{id}', 'ClientController@getUserEdit')->name('client.edit');
 Route::post('/userupdate/{id}', 'ClientController@postUpdateUser')->name('client.update');
+Route::get('/orderonline', 'ClientController@getPizzaList')->name('client.orderonline');
+Route::post('/addtocart', 'ClientController@postAddToCart')->name('client.addtocart');
+Route::get('/clearcart', 'ClientController@getClearCart')->name('client.clearcart');
+Route::get('/cancelcart', 'ClientController@getCancelCart')->name('client.cancelcart');
+Route::get('/removefromcart/{pid}', 'ClientController@getRemoveFromCart')->name('client.removefromcart');
 
 Route::get('/login', 'PagesController@getLogin')->name('login');
 

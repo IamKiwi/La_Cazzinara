@@ -17,9 +17,9 @@ class CreatePizzasTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('ingredients')->unique();
-            $table->string('price_small');
-            $table->string('price_medium');
-            $table->string('price_large');
+            $table->decimal('price_small', 6, 2);
+            $table->decimal('price_medium', 6, 2);
+            $table->decimal('price_large', 6, 2);
             $table->timestamps();
         });
     }
