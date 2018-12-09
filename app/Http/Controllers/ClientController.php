@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
+use App\Orderitem;
 use App\Pizza;
 use App\User;
+use Carbon\Carbon;
 use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Session;
 
 class ClientController extends Controller
@@ -82,41 +86,6 @@ class ClientController extends Controller
         return redirect()->route('client.edit', $user->id);
     }
 
-//    public function getPizzaList()
-//    {
-//        $pizza = Pizza::all();
-//
-//        if(Session::has('cart'))
-//        {
-//            $ids[] = Session::get('cart');
-//            $cart = array();
-//            foreach ($ids as $i)
-//                foreach($i as $x)
-//                    $cart[] = Pizza::where('id', '=', $x)->get();
-//
-//            $rozmiary[] = Session::get('rozmiar');
-//            $ilosc[] = Session::get('liczba');
-//
-//            return view('client.makeorder')->with('pizza', $pizza)->with('cart', $cart)->with('rozm', $rozmiary)
-//                ->with('ilosc', $ilosc);
-//        }
-//        else
-//            return view('client.makeorder')->with('pizza', $pizza);
-//    }
-//
-//    public function postAddToCart(Request $request)
-//    {
-//        $id[] = $request->session()->get('cart');
-//        $rozm[] = $request->session()->get('rozmiar');
-//        $il[] = $request->session()->get('liczba');
-//
-//        $request->session()->push('cart', $request->p_id);
-//        $request->session()->push('rozmiar', $request->rozmiar);
-//        $request->session()->push('liczba', $request->ilosc);
-//
-//        return redirect()->route('client.orderonline');
-//    }
-
     public function getPizzaList()
     {
         $pizza = Pizza::all();
@@ -158,7 +127,8 @@ class ClientController extends Controller
 
         Cart::session(Auth::id())->add($pid, $pizza->name, $price,
                                        $request->quantity, array('size' => $rozmiar,
-                                               'ingredients' => $pizza->ingredients));
+                                               'ingredients' => $pizza->ingredients,
+                                               'id_pizza' => $pizza->id));
         return redirect()->route('client.orderonline');
     }
 
@@ -180,5 +150,74 @@ class ClientController extends Controller
         Cart::session(Auth::id())->clear();
 
         return redirect()->route('client.orderonline');
+    }
+
+    public function getDoOrder()
+    {
+        if(Cart::session(Auth::id())->isEmpty())
+            return Redirect::back()->withErrors(['msg' => 'Nie wybrałeś żadnej pizzy :(']);
+
+        $cart = Cart::session(Auth::id())->getContent();
+        return view('client.orderconfirmation')->with('cart', $cart);
+    }
+
+    public function getConfirmOrder()
+    {
+        Order::create([
+            'id_user' => Auth::id(),
+            'total_price' => Cart::session(Auth::id())->getTotal(),
+            'status' => 'Oczekiwanie na potwierdzenie',
+            'created_at' => Carbon::now('Europe/Warsaw')
+        ]);
+
+        $order = Order::where('id_user', Auth::id())->orderBy('created_at', 'desc')->first();
+        $cart = Cart::session(Auth::id())->getContent();
+
+        foreach ($cart as $item)
+        {
+            $order->orderitem()->create([
+                'id_order' => $order->id,
+                'id_pizza' => $item->attributes->id_pizza,
+                'quantity' => $item->quantity,
+                'size' => $item->attributes->size,
+                'price' => $item->price,
+                'created_at' => Carbon::now('Europe/Warsaw')
+            ]);
+        }
+
+        Cart::session(Auth::id())->clear();
+        return redirect()->route('client.ordered');
+    }
+
+    public function getOrderConfirmed()
+    {
+        $orderitems = Order::where('id_user', Auth::id())->orderBy('created_at', 'desc')->first()->orderitem;
+        $order = Order::where('id_user', Auth::id())->orderBy('created_at', 'desc')->first();
+        $pizzas = Orderitem::where('id_order', $order->id)->get();
+        $pizza = [];
+
+        foreach($pizzas as $p)
+            $pizza [] = $p->pizza;
+
+        return view('client.ordered')->with('order', $order)
+                                           ->with('orderitem', $orderitems)
+                                           ->with('pizza', $pizza);
+    }
+
+    public function getOrdersHistory()
+    {
+        $orderitems = Order::where('id_user', Auth::id())->orderBy('created_at', 'desc')->get();
+        return view('client.ordershistory')->with('order', $orderitems);
+    }
+
+    public function getOrderDetails($id)
+    {
+        $orderdetails = Order::where('id', $id)->orderBy('created_at', 'desc')->first()->orderitem;
+        $pizzas = Orderitem::where('id_order', $id)->get();
+
+        foreach($pizzas as $p)
+            $p->pizza;
+
+        return view('client.ordershistorydetails')->with('orderdetails', $orderdetails);
     }
 }

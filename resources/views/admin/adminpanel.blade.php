@@ -18,7 +18,7 @@
                         <ul class="actions vertical">
                             <li><a href="{{ route('admin.pizzalist') }}" class="button fit">Zarządzanie pizzami</a></li>
                             <li><a href="{{ route('admin.userlist') }}" class="button fit">Zarządzanie użytkownikami</a></li>
-                            <li><a href="#" class="button fit">Bieżące zamówienia</a></li>
+                            <li><a href="{{ route('admin.orderstrack') }}" class="button fit">Obsługa zamówień</a></li>
                             <li><a href="#" class="button fit">Podsumowanie finansowe</a></li>
                             <li><a href="#" class="button fit">Feedback</a></li>
                             <li><a href="#" class="button fit">Statystyki</a></li>

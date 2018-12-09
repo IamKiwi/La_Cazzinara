@@ -8,6 +8,8 @@
         <article id="main">
             <section class="wrapper style5">
                 <div class="inner">
+                    @include('partials._messages')
+
                     <section>
                         <h4>Koszyk</h4>
                         <div class="table-wrapper">
@@ -22,25 +24,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <form method="post" action="#">
-                                            @foreach($cart as $c)
-                                                <tr>
-                                                    <td>{{ $c->name}}</td>
-                                                    <td>{{ $c->attributes->ingredients}}</td>
-                                                    <td>{{ $c->attributes->size }}</td>
-                                                    <td>{{ number_format($c->price , 2, '.', ' ')}}</td>
-                                                    <td>{{ $c->quantity }}</td>
-                                                    <td><a href="{{ route('client.removefromcart', $c->id) }}" class="btn btn-danger btn-sm">Usuń</a></td>
-                                                </tr>
-                                            @endforeach
+                                    @foreach($cart as $c)
+                                        <tr>
+                                                <td>{{ $c->name}}</td>
+                                                <td>{{ $c->attributes->ingredients}}</td>
+                                                <td>{{ $c->attributes->size }}</td>
+                                                <td>{{ number_format($c->price , 2, '.', ' ')}}</td>
+                                                <td>{{ $c->quantity }}</td>
+                                                <td><a href="{{ route('client.removefromcart', $c->id) }}" class="btn btn-danger btn-sm">Usuń</a></td>
+                                            </tr>
+                                        @endforeach
                                     Całkowita kwota zamówienia: <h3>{{ number_format(Cart::getTotal() , 2, '.', ' ')}}</h3>
-                                </form>
                                 </tbody>
                             </table>
                             {{--{if $numOfPizzas > 0}--}}
                             <br>
-                            <a href="#" class="button special green">Zamów</a>
-                            <a href="{{ route('client.clearcart') }}" class="button ">Wyczyść</a>
+                            <a href="{{ route('client.doorder') }}" class="button special green">Zamów</a>
                             <a href="{{ route('client.cancelcart') }}" class="button special red">Anuluj</a>
                             <br>
                         </div>

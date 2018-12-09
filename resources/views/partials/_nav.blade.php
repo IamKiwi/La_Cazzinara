@@ -18,7 +18,8 @@
                         @elseif(Auth::guard('web')->check())
                             <li><a href="{{route('client.dashboard')}}">Panel Klienta</a></li>
                             <li><a href="{{route('client.orderonline')}}">Zamów</a></li>
-                            <li><a href="#">Edytuj profil</a></li>
+                            <li><a href="{{ route('client.edit', Auth::id()) }}">Edytuj profil</a></li>
+                            <li><a href="{{ route('client.history') }}">Historia zamówień</a></li>
                             <li><a href="{{ route('logout') }}">Wyloguj</a></li>
                         @else
                             <li><a href="/">Home</a></li>

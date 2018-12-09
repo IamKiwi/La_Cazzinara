@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
+use App\Orderitem;
 use App\Pizza;
 use App\User;
 use Illuminate\Http\Request;
@@ -168,5 +170,79 @@ class AdminController extends Controller
         Session::flash('success', 'Użytkownik został poprawnie usunięty z bazy danych :)');
 
         return redirect()->route('admin.userlist');
+    }
+
+    public function getOrdersTrack()
+    {
+        $order = Order::orderBy('created_at', 'desc')->get();
+
+        foreach ($order as $o)
+            $o->user;
+
+        return view('admin.orderstrack')->with('order', $order);
+    }
+
+    public function getOrderDetails($id)
+    {
+        $orderdetails = Order::where('id', $id)->orderBy('created_at', 'desc')->first()->orderitem;
+        $pizzas = Orderitem::where('id_order', $id)->get();
+
+        foreach($pizzas as $p)
+            $p->pizza;
+
+        return view('admin.orderstrackdetails')->with('orderdetails', $orderdetails);
+    }
+
+    public function getAcceptOrder($id)
+    {
+        $order = Order::find($id);
+        $order->status = "W trakcie realizacji";
+        $order->save();
+
+        return redirect()->route('admin.orderstrack');
+    }
+
+    public function getRejectOrder($id)
+    {
+        $order = Order::find($id);
+        $order->status = "Odrzucone";
+        $order->save();
+
+        return redirect()->route('admin.orderstrack');
+    }
+
+    public function getRefuseOrder($id)
+    {
+        $order = Order::find($id);
+        $order->status = "Odmówione";
+        $order->save();
+
+        return redirect()->route('admin.orderstrack');
+    }
+
+    public function getOrderDone($id)
+    {
+        $order = Order::find($id);
+        $order->status = "Zrealizowane";
+        $order->save();
+
+        return redirect()->route('admin.orderstrack');
+    }
+
+    public function getOrderPrepared($id)
+    {
+        $order = Order::find($id);
+        $order->status = "Gotowe";
+        $order->save();
+
+        return redirect()->route('admin.orderstrack');
+    }
+
+    public function getDeleteOrder($id)
+    {
+        $order = Order::find($id);
+        $order->delete();
+
+        return redirect()->route('admin.orderstrack');
     }
 }

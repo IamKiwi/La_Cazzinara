@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pizza;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PagesController
@@ -28,8 +29,11 @@ class PagesController
         return view('pages.pizzalist')->with('pizza', $pizza);
     }
 
-    public function getGodMode()
+    public function getSearchPizza(Request $request)
     {
-        return view('pages.godmode');
+        $search = $request->get('search');
+        $pizza = Pizza::where('name', 'like', '%'.$search.'%')->paginate(5);
+
+        return view('pages.pizzalist')->with('pizza', $pizza);
     }
 }

@@ -181,3 +181,8 @@ ul li
 {
     display: inline-flex !important;
 }
+
+.margin-hack
+{
+    margin-right: 200px;
+}
