@@ -10,8 +10,8 @@
                             <li><a href="{{ route('admin.dashboard') }}">Panel Administratora</a></li>
                             <li><a href="{{ route('admin.pizzalist') }}">Zarządzanie pizzami</a></li>
                             <li><a href="{{ route('admin.userlist') }}">Zarządzanie użytkownikami</a></li>
-                            <li><a href="#">Bieżące zamówienia</a></li>
-                            <li><a href="#">Podsumowanie finansowe</a></li>
+                            <li><a href="{{ route('admin.orderstrack') }}">Obsługa zamówień</a></li>
+                            <li><a href="{{ route('admin.finances') }}">Podsumowanie finansowe</a></li>
                             <li><a href="#">Feedback</a></li>
                             <li><a href="#">Statystyki</a></li>
                             <li><a href="{{ route('logout') }}">Wyloguj</a></li>

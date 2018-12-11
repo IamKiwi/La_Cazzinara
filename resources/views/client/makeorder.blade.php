@@ -57,6 +57,7 @@
                                     <div class="3u 12u$(xsmall)">
                                         <button type="submit">Szukaj</button>
                                     </div>
+                                </div>
                             </form>
                         </div>
                         <div class="table-wrapper">
@@ -109,4 +110,5 @@
                 </div>
             </section>
         </article>
+    </div>
 @endsection

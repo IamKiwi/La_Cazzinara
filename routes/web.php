@@ -47,11 +47,16 @@ Route::prefix('admin')->group(function ()
     Route::get('/readyorder/{id}', 'AdminController@getOrderDone')->name('admin.orderisready');
     Route::get('/deleteorder/{id}', 'AdminController@getDeleteOrder')->name('admin.deleteorder');
 
+    Route::get('finances', 'AdminController@getFinances')->name('admin.finances');
+
+    Route::get('feedbacks', 'AdminController@getFeedbacks')->name('admin.feedbacks');
+
 });
+
+Route::get('/home', 'ClientController@getClientPanel')->name('client.dashboard');
 
 Route::prefix('client')->group(function()
 {
-    Route::get('/home', 'ClientController@getClientPanel')->name('client.dashboard');
     Route::get('/useredit/{id}', 'ClientController@getUserEdit')->name('client.edit');
     Route::post('/userupdate/{id}', 'ClientController@postUpdateUser')->name('client.update');
     Route::get('/orderonline', 'ClientController@getPizzaList')->name('client.orderonline');
@@ -64,6 +69,9 @@ Route::prefix('client')->group(function()
     Route::get('/orderconfirmed', 'ClientController@getOrderConfirmed')->name('client.ordered');
     Route::get('/ordershistory', 'ClientController@getOrdersHistory')->name('client.history');
     Route::get('/orderdetails/{id}', 'ClientController@getOrderDetails')->name('client.ordershistorydetails');
+    Route::get('/sendfeedback/{id}', 'ClientController@getSendFeedback')->name('client.sendfeedback');
+    Route::post('/savefeedback', 'ClientController@postSaveFeedback')->name('client.savefeedback');
+    Route::get('/seefeedback/{id}', 'ClientController@getSeeFeedback')->name('client.seefeedback');
 
 });
 

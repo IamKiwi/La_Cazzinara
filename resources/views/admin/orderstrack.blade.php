@@ -73,6 +73,7 @@
                             </tbody>
                         </table>
                     </div>
+                <a href="{{ route('admin.dashboard') }}" class="button special red fix-margin-top">Powrót</a>
             </div>
         </section>
     </article>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Feedback;
 use App\Order;
 use App\Orderitem;
 use App\Pizza;
@@ -207,6 +208,7 @@ class ClientController extends Controller
     public function getOrdersHistory()
     {
         $orderitems = Order::where('id_user', Auth::id())->orderBy('created_at', 'desc')->get();
+
         return view('client.ordershistory')->with('order', $orderitems);
     }
 
@@ -219,5 +221,35 @@ class ClientController extends Controller
             $p->pizza;
 
         return view('client.ordershistorydetails')->with('orderdetails', $orderdetails);
+    }
+
+    public function getSendFeedback($id)
+    {
+        $order = Order::where('id', $id)->first();
+        $oid = $order->id;
+        return view('client.feedback')->with('oid', $oid);
+    }
+
+    public function getSeeFeedback($oid)
+    {
+        $feedback = Feedback::where('id_order', $oid)->first();
+        return view('client.seefeedback')->with('feedback', $feedback);
+    }
+
+    public function postSaveFeedback(Request $request)
+    {
+        Feedback::create([
+            'id_order' => $request->input('oid'),
+            'id_user' => Auth::id(),
+            'message' => $request->input('feedback'),
+            'grade' => $request->input('grade'),
+            'public' => $request->input('opinion_type'),
+            'created_at' => Carbon::now('Europe/Warsaw'),
+            'updated_at' => Carbon::now('Europe/Warsaw'),
+        ]);
+
+        Session::flash('success', 'Dziękujemy za Twoją opinię');
+
+        return redirect()->route('client.history');
     }
 }

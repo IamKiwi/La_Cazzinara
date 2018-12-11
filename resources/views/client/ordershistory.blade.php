@@ -1,5 +1,4 @@
 @extends('main')
-
 @section('title', 'Historia zamówień')
 @section('content')
 <div id="page-wrapper">
@@ -7,7 +6,9 @@
     <article id="main">
         <section class="wrapper style5">
             <div class="inner">
-                    <div class="table-wrapper">
+                @include('partials._messages')
+
+                <div class="table-wrapper">
                         <h4>Historia zamówień</h4>
                         <p>Zobacz historię swoich zamówień. Możesz podzielić się z nami swoją opinią, jeśli
                         masz ochotę.</p>
@@ -28,9 +29,15 @@
                                     <td>{{ $o->id }}</td>
                                     <td>{{ $o->created_at }}</td>
                                     <td>{{ $o->total_price }}</td>
-                                    <td>{{ $o->status}}</td>
+                                    <td>{{ $o->status }}</td>
                                     <td><a href="{{ route('client.ordershistorydetails', $o->id) }}" class="btn btn-info btn-sm">Zobacz</a></td>
-                                    <td><a href="#" class="btn btn-info btn-sm">Wystaw opinie</a></td>
+                                    @if($o->status === 'Zrealizowane' and empty($o->feedback[0]))
+                                        <td><a href="{{ route('client.sendfeedback', $o->id) }}" class="btn btn-info btn-sm">Wystaw opinie</a></td>
+                                    @elseif($o->status === 'Zrealizowane' and !empty($o->feedback[0]))
+                                        <td><a href="{{ route('client.seefeedback', $o->id) }}" class="btn btn-info btn-sm">Zobacz</a></td>
+                                    @else
+                                        <td></td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Feedback;
 use App\Order;
 use App\Orderitem;
 use App\Pizza;
@@ -244,5 +245,29 @@ class AdminController extends Controller
         $order->delete();
 
         return redirect()->route('admin.orderstrack');
+    }
+
+    public function getFinances()
+    {
+        $lossStatuses = ['Odmówione', 'Odrzucone'];
+        $loss = Order::whereIn('status', $lossStatuses)->sum('total_price');
+
+        $net = Order::where('status', 'Zrealizowane')->sum('total_price');
+
+        $balance = $net - $loss;
+
+        return view('admin.finances')->with('net', $net)
+                                           ->with('loss', $loss)
+                                           ->with('balance', $balance);
+    }
+
+    public function getFeedbacks()
+    {
+        $feedback = Feedback::orderBy('id', 'desc')->get();
+
+        foreach ($feedback as $f)
+            error_log(''.$f->order);
+
+        return view('admin.feedbacks')->with('feedback', $feedback);
     }
 }
