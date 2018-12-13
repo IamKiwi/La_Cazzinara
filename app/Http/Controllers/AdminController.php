@@ -8,6 +8,7 @@ use App\Orderitem;
 use App\Pizza;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Session;
 
 class AdminController extends Controller
@@ -22,10 +23,20 @@ class AdminController extends Controller
         return view('admin.adminpanel');
     }
 
+    /********************************************** Zarządzanie pizzami **********************************************/
     public function getPizzaList()
     {
         $pizza = Pizza::paginate(5);
+        return view('admin.pizzalist')->with('pizza', $pizza);
+    }
 
+    public function getSearchPizza(Request $request)
+    {
+        $search = $request->get('search');
+        $search2 = $request->get('search2');
+        $pizza = Pizza::where('name', 'like', '%'.$search.'%')->
+                        where('ingredients', 'like', '%'.$search2.'%')->
+                        paginate(5);
         return view('admin.pizzalist')->with('pizza', $pizza);
     }
 
@@ -98,11 +109,28 @@ class AdminController extends Controller
 
         return view('admin.pizzaedit')->with('pizza', $pizza);
     }
+    /********************************************** /Zarządzanie pizzami *********************************************/
 
     public function getUserList()
     {
         $users = User::all();
+        return view('admin.userlist')->with('users', $users);
+    }
 
+    public function getSearchUsers(Request $request)
+    {
+        $email = $request->get('email');
+        $name = $request->get('name');
+        $surname = $request->get('surname');
+        $address = $request->get('address');
+        $phone = $request->get('phone');
+
+        $users = User::where('email', 'like', $email.'%')->
+                        where('name', 'like', $name.'%')->
+                        where('surname', 'like', $surname.'%')->
+                        where('address', 'like', '%'.$address.'%')->
+                        where('phone_number', 'like', $phone.'%')->paginate(5);
+        $request->flash();
         return view('admin.userlist')->with('users', $users);
     }
 
@@ -172,26 +200,47 @@ class AdminController extends Controller
 
         return redirect()->route('admin.userlist');
     }
-
+    /******************************************** Zarządzanie zamówieniami ********************************************/
     public function getOrdersTrack()
     {
-        $order = Order::orderBy('created_at', 'desc')->get();
-
-        foreach ($order as $o)
-            $o->user;
-
+        $order = Order::orderBy('created_at', 'desc')->paginate(5);
         return view('admin.orderstrack')->with('order', $order);
     }
 
     public function getOrderDetails($id)
     {
         $orderdetails = Order::where('id', $id)->orderBy('created_at', 'desc')->first()->orderitem;
-        $pizzas = Orderitem::where('id_order', $id)->get();
-
-        foreach($pizzas as $p)
-            $p->pizza;
-
         return view('admin.orderstrackdetails')->with('orderdetails', $orderdetails);
+    }
+
+    public function getSearchOrders(Request $request)
+    {
+        $id = $request->get('id');
+        $status = $request->get('status');
+        $address = $request->get('address');
+        $phone = $request->get('phone');
+
+        if($id === null)
+        {
+            $order = Order::where('status', 'like', '%'.$status.'%')->
+            whereHas('user', function($query) use(&$address, &$phone){
+                $query->where('address', 'like', '%'.$address.'%')->where('phone_number', 'like', $phone.'%');
+            })->
+            orderBy('created_at', 'desc')->
+            paginate(5);
+        }
+        else
+        {
+            $order = Order::where('id', 'like', $id)->
+            where('status', 'like', '%'.$status.'%')->
+            whereHas('user', function($query) use(&$address, &$phone){
+                $query->where('address', 'like', '%'.$address.'%')->where('phone_number', 'like', $phone.'%');
+            })->
+            orderBy('created_at', 'desc')->
+            paginate(5);
+        }
+
+        return view('admin.orderstrack')->with('order', $order);
     }
 
     public function getAcceptOrder($id)
@@ -246,6 +295,7 @@ class AdminController extends Controller
 
         return redirect()->route('admin.orderstrack');
     }
+    /******************************************** /Zarządzanie zamówieniami *******************************************/
 
     public function getFinances()
     {
@@ -263,11 +313,38 @@ class AdminController extends Controller
 
     public function getFeedbacks()
     {
-        $feedback = Feedback::orderBy('id', 'desc')->get();
+        $feedback = Feedback::orderBy('created_at', 'desc')->paginate(5);
 
-        foreach ($feedback as $f)
-            error_log(''.$f->order);
+        $feedbackStats = [];
+        foreach(['positive', 'neutral', 'negative'] as $g)
+            $feedbackStats [] = Feedback::where('grade', $g)->count();
 
-        return view('admin.feedbacks')->with('feedback', $feedback);
+        return view('admin.feedbacks')->with('feedback', $feedback)->with('fs', $feedbackStats);
+    }
+
+    public function getSearchFeedbacks(Request $request)
+    {
+        $user = $request->get('user');
+        $grade = $request->get('grade');
+        $public = $request->get('public');
+
+        $feedback = Feedback::where('grade', 'like', $grade.'%')->
+        where('public', 'like', $public.'%')->
+        whereHas('user', function($query) use(&$user){
+            $query->where('name', 'like', '%'.$user.'%')->orwhere('surname', 'like', '%'.$user.'%');
+        })->orderBy('created_at', 'desc')->paginate(5);
+
+        $feedbackStats = [];
+        foreach(['positive', 'neutral', 'negative'] as $g)
+            $feedbackStats [] = Feedback::where('grade', $g)->count();
+        $request->flash();
+
+        return view('admin.feedbacks')->with('feedback', $feedback)->with('fs', $feedbackStats);
+    }
+
+    public function getSeeFeedback($id)
+    {
+        $feedback = Feedback::find($id);
+        return Response::json($feedback);
     }
 }

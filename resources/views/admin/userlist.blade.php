@@ -3,8 +3,8 @@
 @section('title', 'Zarządzanie użytkownikami')
 @section('content')
     <article id="main">
-        <section class="wrapper style5">
-            <div class="inner">
+        <section class="wrapper style5 fancy-back">
+            <div class="inner white-back">
                 <section>
                     <header>
                         <h4>Panel Administratora</h4>
@@ -16,12 +16,25 @@
                 <section>
                     <div class="inner">
                         @include('partials._messages')
-                        <form id="searchForm">
+                        <h4>Wyszukiwanie</h4>
+                        <form id="searchForm" action="{{ route('admin.searchusers') }}">
                             <div class="row uniform">
-                                <div class="4u 12u$(xsmall)">
-                                    <input type="text" name="pizzaSearch" placeholder="Nazwa użytkownika" value="" />
+                                <div class="2u 12u$(xsmall)">
+                                    <input type="text" name="email" placeholder="Email" value="{{ old('email') }}" />
                                 </div>
-                                <div class="8u 12u$(xsmall)">
+                                <div class="2u 12u$(xsmall)">
+                                    <input type="text" name="name" placeholder="Imię" value="{{ old('name') }}" />
+                                </div>
+                                <div class="2u 12u$(xsmall)">
+                                    <input type="text" name="surname" placeholder="Nazwisko" value="{{ old('surname') }}" />
+                                </div>
+                                <div class="2u 12u$(xsmall)">
+                                    <input type="text" name="address" placeholder="Adres" value="{{ old('address') }}" />
+                                </div>
+                                <div class="2u 12u$(xsmall)">
+                                    <input type="text" name="phone" placeholder="Telefon" value="{{ old('phone') }}" />
+                                </div>
+                                <div class="2u 12u$(xsmall)">
                                     <button type="submit">Szukaj</button>
                                 </div>
                             </div>
@@ -33,7 +46,7 @@
                             <tr>
                                 <th></th>
                                 <th>ID</th>
-                                <th>Nazwa użytkownika (mail)</th>
+                                <th>Email</th>
                                 <th>Imię</th>
                                 <th>Nazwisko</th>
                                 <th>Adres</th>

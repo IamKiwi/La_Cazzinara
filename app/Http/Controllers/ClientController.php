@@ -28,6 +28,11 @@ class ClientController extends Controller
         return view('client.clientpanel');
     }
 
+    public function getPasswordChange()
+    {
+        return view('client.userpasschange');
+    }
+
     public function getUserEdit($id)
     {
         $user = User::find($id);

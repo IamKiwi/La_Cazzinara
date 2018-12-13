@@ -4,8 +4,8 @@
 <div id="page-wrapper">
     <!-- Main -->
     <article id="main">
-        <section class="wrapper style5">
-            <div class="inner">
+        <section class="wrapper style5 fancy-back">
+            <div class="inner white-back">
                 @include('partials._messages')
 
                 <div class="table-wrapper">

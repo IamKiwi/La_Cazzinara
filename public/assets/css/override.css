@@ -1,6 +1,7 @@
 #banner
 {
     background-image: url("../../images/Pizza.jpg") !important;
+    background-size: cover;
 }
 
 .button.special.green
@@ -80,6 +81,22 @@ If you need more, that's where to get'em.
 .dark-back
 {
     background-image: url("../../images/dark_wall.png") !important;
+}
+
+.fancy-back
+{
+    background-image: url("../../images/fancy-back.jpg") !important;
+    background-size: cover;
+}
+
+.white-back
+{
+    background-image: url("../../images/white-back.jpg") !important;
+    background-size: cover;
+    padding: 100px;
+    -webkit-box-shadow: 0px 0px 30px 20px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 30px 20px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 30px 20px rgba(0,0,0,0.75);
 }
 
 .promo
@@ -190,4 +207,9 @@ ul li
 .margin-hack
 {
     margin-right: 200px;
+}
+
+.top-margin-override
+{
+    margin-top: 50px;
 }

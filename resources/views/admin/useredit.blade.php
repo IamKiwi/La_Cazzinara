@@ -4,9 +4,15 @@
 @section('content')
 <div id="page-wrapper">
     <article id="main">
-        <section class="wrapper style5">
-            <div class="inner">
+        <section class="wrapper style5 fancy-back">
+            <div class="inner white-back">
                 <section>
+                    <section>
+                        <header>
+                            <h4>Edycja użytkownika</h4>
+                            <hr>
+                        </header>
+                    </section>
                     @include('partials._messages')
                     <form method="post" action="{{ route('admin.updateuser', $user->id)}}">
                         @csrf

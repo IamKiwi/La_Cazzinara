@@ -3,8 +3,8 @@
 @section('content')
     <!-- Main -->
     <article id="main">
-        <section class="wrapper style5 wooden-back">
-            <div class="inner">
+        <section class="wrapper style5 fancy-back ">
+            <div class="inner white-back">
                 <section>
                     <header>
                         <h4>Logowanie Administratora</h4>

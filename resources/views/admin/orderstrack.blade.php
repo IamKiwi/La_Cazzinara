@@ -5,10 +5,39 @@
 <div id="page-wrapper">
     <!-- Main -->
     <article id="main">
-        <section class="wrapper style5">
-            <div class="inner">
-                    <div class="table-wrapper">
+        <section class="wrapper style5 fancy-back">
+            <div class="inner white-back">
+                <section>
+                    <header>
+                        <h4>Panel Administratora</h4>
+                        <h5>Zarządzanie zamówieniami</h5>
+                        <hr>
+                    </header>
+                </section>
+                <h4>Wyszukiwanie</h4>
+                @include('partials._messages')
+                <form id="searchForm" action="{{ route('admin.searchorders') }}">
+                    <div class="row uniform">
+                        <div class="2u 12u$(xsmall)">
+                            <input type="text" name="id" placeholder="Nr" value="" />
+                        </div>
+                        <div class="2u 12u$(xsmall)">
+                            <input type="text" name="status" placeholder="Status" value="" />
+                        </div>
+                        <div class="2u 12u$(xsmall)">
+                            <input type="text" name="address" placeholder="Adres" value="" />
+                        </div>
+                        <div class="2u 12u$(xsmall)">
+                            <input type="text" name="phone" placeholder="Telefon" value="" />
+                        </div>
+                        <div class="2u 12u$(xsmall)">
+                            <button type="submit">Szukaj</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="table-wrapper">
                         <h4>Bieżące zamówienia</h4>
+                        <p> Rekordy {{$order->firstItem()}} - {{$order->lastItem()}} z {{$order->total()}}</p>
                         <table id="table" class="table">
                             <thead>
                             <tr>
@@ -73,6 +102,9 @@
                             </tbody>
                         </table>
                     </div>
+                <div class="text-center">
+                    {!! $order->links() !!}
+                </div>
                 <a href="{{ route('admin.dashboard') }}" class="button special red fix-margin-top">Powrót</a>
             </div>
         </section>

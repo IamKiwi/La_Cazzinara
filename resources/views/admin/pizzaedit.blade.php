@@ -6,8 +6,8 @@
 <div id="page-wrapper">
     <!-- Main -->
     <article id="main">
-        <section class="wrapper style5">
-            <div class="inner">
+        <section class="wrapper style5 fancy-back">
+            <div class="inner white-back">
                 <section>
                     <form method="post" action="{{ empty($pizza->id) ? route('admin.savepizza') : route('admin.updatepizza', $pizza->id)}}">
                         @csrf

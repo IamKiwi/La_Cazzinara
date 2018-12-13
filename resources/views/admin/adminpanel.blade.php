@@ -2,8 +2,8 @@
 @section('title', 'Panel Administratora')
 @section('content')
 <article id="main">
-    <section class="wrapper style5">
-        <div class="inner">
+    <section class="wrapper style5 fancy-back">
+        <div class="inner white-back">
             <section>
                 <header>
                     <h4>Panel Administratora</h4>

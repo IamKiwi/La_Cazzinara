@@ -12,7 +12,7 @@
                             <li><a href="{{ route('admin.userlist') }}">Zarządzanie użytkownikami</a></li>
                             <li><a href="{{ route('admin.orderstrack') }}">Obsługa zamówień</a></li>
                             <li><a href="{{ route('admin.finances') }}">Podsumowanie finansowe</a></li>
-                            <li><a href="#">Feedback</a></li>
+                            <li><a href="{{ route('admin.feedbacks') }}">Feedback</a></li>
                             <li><a href="#">Statystyki</a></li>
                             <li><a href="{{ route('logout') }}">Wyloguj</a></li>
                         @elseif(Auth::guard('web')->check())

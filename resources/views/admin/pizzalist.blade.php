@@ -3,8 +3,8 @@
 @section('title', 'Zarządzanie pizzami')
 @section('content')
     <article id="main">
-        <section class="wrapper style5">
-            <div class="inner">
+        <section class="wrapper style5 fancy-back">
+            <div class="inner white-back">
                 <section>
                     <header>
                         <h4>Panel Administratora</h4>
@@ -15,10 +15,13 @@
                 </section>
                 <section>
                     @include('partials._messages')
-                    <form id="searchForm">
+                    <form id="searchForm" action="{{ route('admin.searchpizzalist') }}">
                         <div class="row uniform">
                             <div class="3u 12u$(xsmall)">
-                                <input type="text" name="pizzaSearch" placeholder="Nazwa pizzy" value="" />
+                                <input type="text" name="search" placeholder="Nazwa pizzy" value="" />
+                            </div>
+                            <div class="3u 12u$(xsmall)">
+                                <input type="text" name="search2" placeholder="Skladniki" value="" />
                             </div>
                             <div class="3u 12u$(xsmall)">
                                 <button type="submit">Szukaj</button>
@@ -27,6 +30,7 @@
                     </form>
                     <div class="table-wrapper">
                         <h4>Nasze pizze</h4>
+                        <p> Rekordy {{$pizza->firstItem()}} - {{$pizza->lastItem()}} z {{$pizza->total()}}</p>
                         <table class="table lower-font">
                             <thead>
                             <tr>
@@ -60,7 +64,7 @@
                     <div class="row uniform">
                         <ul class="actions">
                             <li><a href="{{route('admin.addpizza')}}" class="button special green">Dodaj nową pizze</a></li>
-                            <li><a href="/admin" class="button special">Powrót</a></li>
+                            <li><a href="{{ route('admin.dashboard') }}" class="button special">Powrót</a></li>
                         </ul>
                     </div>
                 </section>

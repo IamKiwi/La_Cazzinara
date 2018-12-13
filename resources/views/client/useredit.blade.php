@@ -2,8 +2,8 @@
 @section('title', 'Edycja profilu')
 @section('content')
     <article id="main">
-        <section class="wrapper style5 wooden-back">
-            <div class="inner">
+        <section class="wrapper style5 fancy-back">
+            <div class="inner white-back">
                 <section>
                     <header>
                         <h4>Edytuj swój profil</h4>
@@ -17,7 +17,7 @@
                     <div class="12u$">
                         <h4>Zmiana hasła</h4>
                         <p>Możesz zmienić swoje hasło klikając poniższy przycisk</p>
-                        <a href="#" class="button ">Zmień hasło</a>
+                        <a href="{{ route('client.passchange') }}" class="button ">Zmień hasło</a>
                     </div>
 
                     <div class="12u$">

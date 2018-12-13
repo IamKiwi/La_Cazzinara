@@ -5,8 +5,8 @@
 <div id="page-wrapper">
     <!-- Main -->
     <article id="main">
-        <section class="wrapper style5">
-            <div class="inner">
+        <section class="wrapper style5 fancy-back">
+            <div class="inner white-back">
                     <div class="table-wrapper">
                         <h4>Szczegółowe informacje o zamówieniu</h4>
                         <p>Przejrzyj szczegóły zamówienia. Zrealizuj je lub odrzuć.
