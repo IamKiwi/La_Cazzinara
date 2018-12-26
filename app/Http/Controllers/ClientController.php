@@ -11,13 +11,12 @@ use Carbon\Carbon;
 use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Session;
 
 class ClientController extends Controller
 {
-    private $itemId = 0;
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -33,9 +32,9 @@ class ClientController extends Controller
         return view('client.userpasschange');
     }
 
-    public function getUserEdit($id)
+    public function getUserEdit()
     {
-        $user = User::find($id);
+        $user = User::find(Auth::id());
 
         $user_address = explode(',', $user->address);
         $address = ['street' => $user_address[0],
@@ -46,9 +45,49 @@ class ClientController extends Controller
         return view('client.useredit')->with('user', $user)->with('user_addr', $address);
     }
 
-    public function postUpdateUser(Request $request, $id)
+    public function postPasswordChange(Request $request)
     {
-        $user = User::find($id);
+        $user = User::where('id', '=', Auth::id())->first();
+
+        $this->validate($request, [
+            'current-password' => 'required',
+            'new-password' => 'confirmed|required|string|min:6',
+        ], [
+            'current-password.required' => ':attribute jest wymagane',
+            'new-password.required' => ':attribute jest wymagane',
+            'new-password.confirmed' => 'Musisz potwierdzić nowe hasło',
+            'new-password.min' => 'Nowe hasło musi składać się z min. 6 znaków'
+        ], [
+            'current-password' => 'Obecne hasło',
+            'new-password' => 'Nowe hasło',
+        ]);
+
+        if(Hash::check($request->input('current-password'), $user->password) && $request->input('current-password') != '')
+        {
+            $user = User::find(Auth::id());
+            $user->password = Hash::make($request->input('new-password'));
+            $user->save();
+
+            Session::flash('success', 'Hasło zostało pomyślnie zmienione');
+
+            return redirect()->route('client.dashboard');
+        }
+        else
+            return view('client.userpasschange')->withErrors(['error' => 'Obecne hasło jest niepoprawne']);
+    }
+
+    public function postUpdateUser(Request $request)
+    {
+        $user = User::find(Auth::id());
+
+        $messages = ['name.required' => ':attribute jest wymagane',
+                     'name.max' => ':attribute jest zbyt długie',
+            'surname.required' => ':attribute jest wymagane',
+            'surname.max' => ':attribute jest zbyt długie',
+            'email.required' => ':attribute jest wymagany',
+            'email.email' => ':attribute nie jest prawidłowym adresem e-mail',
+            'email.max' => ':attribute jest zbyt długi',
+            'phone_number.required' => ':attribute jest wymagany',];
 
         if($user->email == $request->email)
         {
@@ -98,9 +137,18 @@ class ClientController extends Controller
 
         $cart = Cart::session(Auth::id())->getContent();
         if(isset($cart))
-        {
             return view('client.makeorder')->with('pizza', $pizza)->with('cart', $cart);
-        }
+        else
+            return view('client.makeorder')->with('pizza', $pizza);
+    }
+
+    public function getSearchPizza(Request $request)
+    {
+        $search = $request->get('search');
+        $pizza = Pizza::where('name', 'like', '%'.$search.'%')->paginate(5);
+        $cart = Cart::session(Auth::id())->getContent();
+        if(isset($cart))
+            return view('client.makeorder')->with('pizza', $pizza)->with('cart', $cart);
         else
             return view('client.makeorder')->with('pizza', $pizza);
     }
@@ -212,8 +260,7 @@ class ClientController extends Controller
 
     public function getOrdersHistory()
     {
-        $orderitems = Order::where('id_user', Auth::id())->orderBy('created_at', 'desc')->get();
-
+        $orderitems = Order::where('id_user', Auth::id())->orderBy('created_at', 'desc')->paginate(5);
         return view('client.ordershistory')->with('order', $orderitems);
     }
 

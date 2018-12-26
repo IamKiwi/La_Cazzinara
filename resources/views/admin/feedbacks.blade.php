@@ -18,7 +18,7 @@
                     <form id="searchForm" action="{{ route('admin.searchfeedbacks') }}">
                         <div class="row uniform">
                             <div class="3u 12u$(xsmall)">
-                                <input type="text" name="user" placeholder="Imie i/lub nazwisko" value="{{ old('user') }}" />
+                                <input type="text" name="user" placeholder="Imię lub nazwisko" value="{{ old('user') }}" />
                             </div>
                             <div class="3u 12u$(xsmall)">
                                 <select name="grade">

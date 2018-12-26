@@ -50,7 +50,11 @@
                                 <td>{{$p->price_medium}}</td>
                                 <td>{{$p->price_large}}</td>
                                 <td><a href="{{ route('admin.pizzaedit', $p->id) }}" class="btn btn-info btn-sm">Edytuj</a></td>
-                                <td><a href="{{ route('admin.pizzadelete', $p->id) }}" class="btn btn-danger btn-sm">Usuń</a></td>
+                                @if(empty($p->deleted_at))
+                                    <td><a href="{{ route('admin.pizzadelete', $p->id) }}" class="btn btn-danger btn-sm">Usuń</a></td>
+                                @else
+                                    <td><a href="{{ route('admin.pizzarestore', $p->id) }}" class="btn btn-success btn-sm">Przywróć</a></td>
+                                @endif
                             </tr>
                             @endforeach
                             </tbody>

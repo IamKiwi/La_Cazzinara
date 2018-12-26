@@ -14,13 +14,7 @@
                     </header>
                 </section>
                 <section>
-
-                    <ul class="errors">
-                        @foreach ($errors->all() as $message)
-                            <li style="list-style: none"><div class="alert alert-danger" role="alert">{{ $message}}</div></li>
-                        @endforeach
-                    </ul>
-
+                    @include('partials._messages')
                     <form method="post" action="{{route('login')}}">
                         @csrf
 

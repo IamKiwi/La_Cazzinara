@@ -16,3 +16,5 @@
 <!--[if lte IE 8]><link rel="stylesheet" href="{{ URL::asset('assets/css/ie8.css') }}" /><![endif]-->
 <!--[if lte IE 9]><link rel="stylesheet" href="{{ URL::asset('assets/css/ie9.css') }}" /><![endif]-->
 
+<link rel="stylesheet" href="{{ URL::asset('assets/css/carouseria.min.css') }}" />
+

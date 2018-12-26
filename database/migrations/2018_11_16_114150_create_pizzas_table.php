@@ -21,6 +21,7 @@ class CreatePizzasTable extends Migration
             $table->decimal('price_medium', 6, 2);
             $table->decimal('price_large', 6, 2);
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

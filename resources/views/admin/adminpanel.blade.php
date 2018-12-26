@@ -21,7 +21,7 @@
                             <li><a href="{{ route('admin.orderstrack') }}" class="button fit">Obsługa zamówień</a></li>
                             <li><a href="{{ route('admin.finances') }}" class="button fit">Podsumowanie finansowe</a></li>
                             <li><a href="{{ route('admin.feedbacks') }}" class="button fit">Feedback</a></li>
-                            <li><a href="#" class="button fit">Statystyki</a></li>
+                            <li><a href="{{ route('admin.stats') }}" class="button fit">Statystyki</a></li>
                             <li><a href="{{ route('logout') }}" class="button fit">Wyloguj</a></li>
                         </ul>
                     </div>

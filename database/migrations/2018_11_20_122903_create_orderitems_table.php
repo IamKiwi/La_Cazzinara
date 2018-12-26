@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeedbacksTable extends Migration
+class CreateOrderitemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateFeedbacksTable extends Migration
      */
     public function up()
     {
-        Schema::create('feedbacks', function (Blueprint $table) {
+        Schema::create('orderitems', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_order')->unsigned();
-            $table->integer('id_user')->unsigned();
-            $table->string('message');
-            $table->string('grade');
-            $table->string('public');
-            $table->foreign('id_order')->references('id')->on('orders');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->integer('id_pizza')->unsigned();
+            $table->integer('quantity')->unsigned();
+            $table->string('size');
+            $table->string('price');
+            $table->foreign('id_order')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('id_pizza')->references('id')->on('pizzas');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
@@ -34,6 +34,6 @@ class CreateFeedbacksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feedbacks');
+        Schema::dropIfExists('orderitems');
     }
 }

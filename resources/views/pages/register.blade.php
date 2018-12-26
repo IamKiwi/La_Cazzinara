@@ -32,7 +32,7 @@
                                 </select>
                             </div>
                             <div class="6u 12u$(xsmall)">
-                                <input type="text" name="date_of_birth" value="" placeholder="Data urodzenia (RRRR/MM/DD)" />
+                                <input type="text" name="date_of_birth" value="" placeholder="Data urodzenia (RRRR-MM-DD)" />
                             </div>
                             <div class="6u 12u$(xsmall)">
                                 <input type="email" name="email" value="" placeholder="Mail" />

@@ -48,11 +48,10 @@
                         <br>
                         <h4>Wybierz pizze</h4>
                         <div class="inner">
-                            <form id="searchForm"
-                                  onsubmit="ajaxPostForm('searchForm', '{$conf->action_url}adminTrackOrders', 'table'); return false;">
+                            <form id="searchForm" action="{{ route('client.searchpizzalist') }}">
                                 <div class="row uniform">
                                     <div class="3u 12u$(xsmall)">
-                                        <input type="text" name="pizzaSearch" placeholder="Nazwa pizzy" value=""/>
+                                        <input type="text" name="search" placeholder="Nazwa pizzy" value="" />
                                     </div>
                                     <div class="3u 12u$(xsmall)">
                                         <button type="submit">Szukaj</button>

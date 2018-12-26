@@ -15,7 +15,6 @@
                         <table id="table" class="table">
                             <thead>
                             <tr>
-                                <th>Nr zam..</th>
                                 <th>Czas zamówienia</th>
                                 <th>Kwota</th>
                                 <th>Status</th>
@@ -26,7 +25,6 @@
                             <tbody>
                             @foreach($order as $o)
                                 <tr>
-                                    <td>{{ $o->id }}</td>
                                     <td>{{ $o->created_at }}</td>
                                     <td>{{ $o->total_price }}</td>
                                     <td>{{ $o->status }}</td>
@@ -44,6 +42,9 @@
                         </table>
                     </div>
                 <div class="12u$">
+                    <div class="text-center">
+                        {!! $order->links() !!}
+                    </div>
                     <ul class="actions">
                         <br>
                         <li><a href="{{ route('client.dashboard') }}" class="button special red fix-margin-top">Powrót</a></li>

@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('status')->nullable();
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

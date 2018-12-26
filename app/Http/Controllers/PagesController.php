@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Feedback;
 use App\Pizza;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PagesController
 {
     public function getIndex()
     {
-        return view('pages.welcome');
+        $feedback = Feedback::where('grade', 'positive')->where('public', 'true')->orderByRaw('RAND()')->take(5)->get();
+        return view('pages.welcome')->with('feedback', $feedback);
     }
 
     public function getLogin()

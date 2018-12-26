@@ -24,10 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('sex')->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->string('account_active')->default('active');
             $table->timestamp('deactivated_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

@@ -8,6 +8,7 @@
         <article id="main">
             <section class="wrapper style5 fancy-back">
                 <div class="inner white-back">
+                    @include('partials._messages')
                     <section>
                         <header>
                             <h2>Witaj {{ Auth::user()->name }}</h2>
@@ -18,7 +19,7 @@
                             <div class="12u">
                                 <ul class="actions vertical">
                                     <li><a href="{{ route('client.orderonline') }}" class="button fit">Zamów</a></li>
-                                    <li><a href="{{ route('client.edit', Auth::id()) }}" class="button fit">Edytuj Profil</a></li>
+                                    <li><a href="{{ route('client.edit')}}" class="button fit">Edytuj Profil</a></li>
                                     <li><a href="{{ route('client.history') }}" class="button fit">Historia zamówień</a></li>
                                     <li><a href="{{ route('logout') }}" class="button fit">Wyloguj</a></li>
                                 </ul>

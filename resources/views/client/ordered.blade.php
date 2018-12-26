@@ -28,8 +28,8 @@
                                     <tr>
                                         <td>{{ $o->pizza[0]->name}}</td>
                                         <td>{{ $o->pizza[0]->ingredients}}</td>
-                                        <td>{{ $o->price}}</td>
                                         <td>{{ $o->size}}</td>
+                                        <td>{{ number_format($o->price , 2, '.', ' ')}}</td>
                                         <td>{{ $o->quantity}}</td>
                                     </tr>
                                 @endforeach

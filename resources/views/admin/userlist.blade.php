@@ -52,7 +52,6 @@
                                 <th>Adres</th>
                                 <th>Nr telefonu</th>
                                 <th>Data urodzenia</th>
-                                <th>Status konta</th>
                                 <th>Data rejestracji</th>
                                 <th>Data ostatniej aktualizacji</th>
                                 <th>Data deaktywacji</th>
@@ -63,14 +62,21 @@
                             <tr>
                                 <td>
                                     <div class="dropdown">
-                                        <a class="dropdown-toggle glyphicon glyphicon-cog inverted" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <a class="dropdown-toggle glyphicon glyphicon-cog inverted" type="button"
+                                           id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false">
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                             <li><a href="{{ route('admin.useredit', $p->id) }}"
                                                    class="borderless no-padding menu-blue">Edytuj</a></li>
                                             <li role="separator" class="divider"></li>
-                                            <li><a href="#" class="borderless no-padding menu-red">Deaktywuj konto</a></li>
-                                            <li><a href="{{ route('admin.userdelete', $p->id) }}" class="borderless no-padding menu-red">Usuń</a></li>
+                                            @if(empty($p->deleted_at))
+                                            <li><a href="{{ route('admin.userdelete', $p->id) }}"
+                                                   class="borderless no-padding menu-red">Deaktywuj konto</a></li>
+                                            @else
+                                                <li><a href="{{ route('admin.userrestore', $p->id) }}"
+                                                       class="borderless no-padding menu-red">Przywróć</a></li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>
@@ -81,10 +87,9 @@
                                 <td>{{ $p->address}}</td>
                                 <td>{{ $p->phone_number }}</td>
                                 <td>{{ !empty($p->date_of_birth) ? date('y-m-d', strtotime($p->date_of_birth)) : ""}}</td>
-                                <td>{{ $p->account_active }}</td>
                                 <td>{{ !empty($p->created_at) ? date('y-m-d H:i:s', strtotime($p->created_at)) : ""}}</td>
                                 <td>{{ !empty($p->updated_at) ? date('y-m-d H:i:s', strtotime($p->updated_at)) : ""}}</td>
-                                <td>{{ !empty($p->deactivated_at) ? date('y-m-d H:i:s', strtotime($p->deactivated_at)) : ""}}</td>
+                                <td>{{ !empty($p->deleted_at) ? date('y-m-d H:i:s', strtotime($p->deleted_at)) : ""}}</td>
                             </tr>
                             @endforeach
                             </tbody>

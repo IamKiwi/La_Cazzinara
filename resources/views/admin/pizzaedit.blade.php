@@ -9,6 +9,7 @@
         <section class="wrapper style5 fancy-back">
             <div class="inner white-back">
                 <section>
+                    @include('partials._messages')
                     <form method="post" action="{{ empty($pizza->id) ? route('admin.savepizza') : route('admin.updatepizza', $pizza->id)}}">
                         @csrf
                         <h4>Dodaj / edytuj pizze</h4>

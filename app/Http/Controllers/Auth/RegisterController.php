@@ -63,7 +63,7 @@ class RegisterController extends Controller
             'phone_number.required' => 'Musisz podać numer telefonu',
             'phone_number.digits_between' => 'Numer telefonu jest nieprawidłowy',
             'phone_number.numeric' => 'Numer telefonu musi składać się z cyfr',
-            'date_of_birth.dateformat' => 'Data urodzenia musi mieć format RRRR-MM-DD',
+            'date_of_birth.dateformat' => 'Nieprawidłowa data lub nieprawidłowy format daty',
             'street.required' => 'Musisz podać ulicę',
             'number.required' => 'Musisz podać numer domu/mieszkania',
             'city.required' => 'Musisz podać miasto',
