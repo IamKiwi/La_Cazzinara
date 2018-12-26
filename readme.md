@@ -104,7 +104,7 @@ jakie dane należy poprawić.
 [![](docs/images/usage/ss1.png)](https://raw.githubusercontent.com/iamkiwi/la_cazzinara/master/docs/images/usage/ss1.png)
 
 ## Panel Klienta
-Z poziomu panelu klienta mamy dostęp możemy złożyć zamówienie, edytować
+Z poziomu panelu klienta możemy złożyć zamówienie, edytować
 swój profil oraz przeglądać historię złożonych zamówień.
 
 [![](docs/images/usage/ss22.png)](https://raw.githubusercontent.com/iamkiwi/la_cazzinara/master/docs/images/usage/ss22.png)
@@ -163,7 +163,7 @@ wystawionych przez użytkowników opinii oraz statystyk przedsiębiorstwa.
 ## Zarządzanie pizzami
 W widoku zarządzania pizzami administrator ma możliwość dodawania, edycji
 oraz usuwania pizz. Usuwanie wykorzystuje metodę "soft delete", tzn. dane 
-w bazie są oznaczane jako przez ustawienie daty w kolumnie deleted_at
+w bazie są oznaczane przez ustawienie daty w kolumnie deleted_at
 i uważane za "usunięte". Po stronie administratora widać "usunięte" rekordy,
 albowiem ma on możliwość przywrócenia takich danych.
 
@@ -172,7 +172,7 @@ albowiem ma on możliwość przywrócenia takich danych.
 ## Zarządzanie użytkownikami
 W widoku zarządzania użytkownikami administrator może edytować dane użytkownika,
 bądź deaktywować jego konto. W razie deaktywacji konta może zostać ono przywrócone.
-Na wykonanie powyższych operacji pozwala rozwijane menu wywoływanie poprzez kliknięcie
+Na wykonanie powyższych operacji pozwala rozwijane menu wywoływane poprzez kliknięcie
 na ikonę koła zębatego przy rekordzie użytkownika.
 
 [![](docs/images/usage/ss9.png)](https://raw.githubusercontent.com/iamkiwi/la_cazzinara/master/docs/images/usage/ss9.png)
@@ -181,7 +181,7 @@ na ikonę koła zębatego przy rekordzie użytkownika.
 W widoku obsługi zamówień administrator może zarządzać zamówieniami. Może podejrzeć
 szczegóły zamówienia klikając przycisk "Zobacz" w kolumnie "Szczegóły zamówienia".
 Poprzez kliknięcie na ikonę koła zębatego można zmienić status zamówienia.
-Status może przyjmować wartości "Oczekiwanie na potwierdzenie", "Odrzucone",
+Status może przyjmować wartości: "Oczekiwanie na potwierdzenie", "Odrzucone",
 "Odmówione", "Gotowe", "Zrealizowane". Odpowiednio oznacza to, że zamówienie:
 Oczekuję na potwierdzenie ze strony administratora, Administrator odrzucił
 zamówienie, Zamówienie zostało odmówione przez klienta (Np. przy odbiorze),
@@ -192,7 +192,7 @@ wysłane, a klient je przyjął i za nie zapłacił.
 
 ## Feedback użytkowników
 W widoku opinii administrator może przeglądać opinie wystawione przez użytkowników. 
-Opinia pojawia się po kliknięciu przycisku "Zobacz" na w kolumnie "Opinia". Opinii
+Opinia pojawia się po kliknięciu przycisku "Zobacz" w kolumnie "Opinia". Opinii
 użytkowników nie można, ani edytować, ani usuwać.
 
 [![](docs/images/usage/ss11.png)](https://raw.githubusercontent.com/iamkiwi/la_cazzinara/master/docs/images/usage/ss11.png)
