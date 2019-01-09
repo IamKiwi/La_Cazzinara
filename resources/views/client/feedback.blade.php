@@ -2,8 +2,8 @@
 @section('title', 'Wystaw opinię')
 @section('content')
     <article id="main">
-        <section class="wrapper style5 wooden-back">
-            <div class="inner">
+        <<section class="wrapper style5 fancy-back">
+            <div class="inner white-back">
                 <section>
                     <header>
                         <h4>Wystaw opinię</h4>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="12u 12u$(xsmall)">
                                 <label for="feedback">Wiadomość</label>
-                                <textarea name="feedback" placeholder="Treść" rows="6"></textarea>
+                                <textarea name="feedback" placeholder="Treść" rows="6" style="resize: none;"></textarea>
                                 <input type="hidden" name="oid" value="{{ $oid }}">
                             </div>
                             <div class="12u$">

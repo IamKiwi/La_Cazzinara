@@ -36,10 +36,29 @@ class AdminController extends Controller
     {
         $search = $request->get('search');
         $search2 = $request->get('search2');
-        $pizza = Pizza::where('name', 'like', '%'.$search.'%')->
-                        where('ingredients', 'like', '%'.$search2.'%')->
-                        withTrashed()->
-                        paginate(5);
+        $search_param = $request->get('visible_pizzas');
+        if($search_param === 'actual')
+        {
+            $pizza = Pizza::where('name', 'like', '%'.$search.'%')->
+            where('ingredients', 'like', '%'.$search2.'%')->
+            paginate(5);
+        }
+        else if($search_param === 'trashed')
+        {
+            $pizza = Pizza::where('name', 'like', '%'.$search.'%')->
+            where('ingredients', 'like', '%'.$search2.'%')->
+            onlyTrashed()->
+            paginate(5);
+        }
+        else
+        {
+            $pizza = Pizza::where('name', 'like', '%'.$search.'%')->
+            where('ingredients', 'like', '%'.$search2.'%')->
+            withTrashed()->
+            paginate(5);
+        }
+        $request->flash();
+
         return view('admin.pizzalist')->with('pizza', $pizza);
     }
 
@@ -154,12 +173,32 @@ class AdminController extends Controller
         $surname = $request->get('surname');
         $address = $request->get('address');
         $phone = $request->get('phone');
+        $searchParam = $request->get('visible_users');
 
-        $users = User::where('email', 'like', $email.'%')->
-                        where('name', 'like', $name.'%')->
-                        where('surname', 'like', $surname.'%')->
-                        where('address', 'like', '%'.$address.'%')->
-                        where('phone_number', 'like', $phone.'%')->withTrashed()->paginate(5);
+        if($searchParam === 'active')
+        {
+            $users = User::where('email', 'like', $email.'%')->
+            where('name', 'like', $name.'%')->
+            where('surname', 'like', $surname.'%')->
+            where('address', 'like', '%'.$address.'%')->
+            where('phone_number', 'like', $phone.'%')->paginate(5);
+        }
+        else if($searchParam === 'trashed')
+        {
+            $users = User::where('email', 'like', $email.'%')->
+            where('name', 'like', $name.'%')->
+            where('surname', 'like', $surname.'%')->
+            where('address', 'like', '%'.$address.'%')->
+            where('phone_number', 'like', $phone.'%')->onlyTrashed()->paginate(5);
+        }
+        else
+        {
+            $users = User::where('email', 'like', $email.'%')->
+            where('name', 'like', $name.'%')->
+            where('surname', 'like', $surname.'%')->
+            where('address', 'like', '%'.$address.'%')->
+            where('phone_number', 'like', $phone.'%')->withTrashed()->paginate(5);
+        }
         $request->flash();
         return view('admin.userlist')->with('users', $users);
     }
@@ -467,6 +506,59 @@ class AdminController extends Controller
 
         \Lava::BarChart('Users', $ma, [
             'title' => 'Zamówienia użytkowników',
+            'vAxis' => ['format' => ''],
+            'hAxis' => ['format' => '', 'ticks' => [0, 5, 10, 15, 20, 25, 30, 35, 40]],
+            'bars' => 'horizontal',
+            'titleTextStyle' => [
+                'color'    => '#eb6b2c',
+                'fontSize' => 14
+            ]
+        ]);
+        /*************************************************************************************************************/
+        $pizzaGrades = [];
+        foreach (['positive', 'neutral', 'negative'] as $grade)
+        {
+            $pizzaGrades [] = DB::select(
+                DB::raw("SELECT o.id_pizza, count(f.grade) as 'num'
+                                   FROM orderitems as o 
+                                   INNER JOIN feedbacks as f ON o.id_order = f.id_order 
+                                   WHERE f.grade = '$grade'
+                                   GROUP BY o.id_pizza"
+                ));
+        }
+
+        $a =  \Lava::DataTable();
+        $a->addStringColumn('Pizza')->
+            addNumberColumn('Pozytywne');
+
+        $positive = $pizzaGrades[0];
+        $neutral = $pizzaGrades[1];
+        $negative = $pizzaGrades[2];
+
+        foreach($positive as $item)
+        {
+            $pizza = Pizza::withTrashed()->find($item->id_pizza);
+            $a->addRow([$pizza->name, $item->num]);
+        }
+
+        $a->addNumberColumn('Negatywne');
+
+        foreach($negative as $item)
+        {
+            $pizza = Pizza::withTrashed()->find($item->id_pizza);
+            $a->addRow([$pizza->name.'', null, $item->num]);
+        }
+
+        $a->addNumberColumn('Neutralne');
+
+        foreach($neutral as $item)
+        {
+            $pizza = Pizza::withTrashed()->find($item->id_pizza);
+            $a->addRow([$pizza->name.'', null, null, $item->num]);
+        }
+
+        \Lava::BarChart('Feed', $a, [
+            'title' => 'Opinie o pizzach',
             'vAxis' => ['format' => ''],
             'hAxis' => ['format' => '', 'ticks' => [0, 5, 10, 15, 20, 25, 30, 35, 40]],
             'bars' => 'horizontal',

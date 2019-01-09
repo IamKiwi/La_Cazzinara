@@ -290,6 +290,10 @@ class ClientController extends Controller
 
     public function postSaveFeedback(Request $request)
     {
+        $this->validate($request, array(
+            'feedback' => 'required|string|max:500'
+        ), ['feedback.required' => 'Musisz napisać opinię']);
+
         Feedback::create([
             'id_order' => $request->input('oid'),
             'id_user' => Auth::id(),

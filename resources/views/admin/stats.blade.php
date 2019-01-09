@@ -23,6 +23,9 @@
                     <div id="perf_div3">
                         @barchart('Users', 'perf_div3')
                     </div>
+                    <div id="perf_div4">
+                        @barchart('Feed', 'perf_div4')
+                    </div>
                     <div class="text-center">
                         <div class="12u$">
                             <ul class="actions">

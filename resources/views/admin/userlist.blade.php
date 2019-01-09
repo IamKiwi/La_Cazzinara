@@ -19,21 +19,31 @@
                         <h4>Wyszukiwanie</h4>
                         <form id="searchForm" action="{{ route('admin.searchusers') }}">
                             <div class="row uniform">
-                                <div class="2u 12u$(xsmall)">
+                                <div class="3u 12u$(xsmall)">
                                     <input type="text" name="email" placeholder="Email" value="{{ old('email') }}" />
                                 </div>
-                                <div class="2u 12u$(xsmall)">
+                                <div class="3u 12u$(xsmall)">
                                     <input type="text" name="name" placeholder="Imię" value="{{ old('name') }}" />
                                 </div>
-                                <div class="2u 12u$(xsmall)">
+                                <div class="3u 12u$(xsmall)">
                                     <input type="text" name="surname" placeholder="Nazwisko" value="{{ old('surname') }}" />
                                 </div>
-                                <div class="2u 12u$(xsmall)">
+                                <div class="3u 12u$(xsmall)">
                                     <input type="text" name="address" placeholder="Adres" value="{{ old('address') }}" />
                                 </div>
+                            </div>
+                            <div class="row uniform">
                                 <div class="2u 12u$(xsmall)">
                                     <input type="text" name="phone" placeholder="Telefon" value="{{ old('phone') }}" />
                                 </div>
+                                <div class="6u 12u$(xsmall)">
+                                    <select name="visible_users">
+                                        <option value="" >Wszyscy</option>
+                                        <option value="active" @if(old('visible_users') === 'active') selected @endif>Tylko aktywni</option>
+                                        <option value="trashed" @if(old('visible_users') === 'trashed') selected @endif>Tylko deaktywowane konta</option>
+                                    </select>
+                                </div>
+
                                 <div class="2u 12u$(xsmall)">
                                     <button type="submit">Szukaj</button>
                                 </div>
@@ -41,7 +51,7 @@
                         </form>
                     <div class="table-responsive">
                         <h4>Użytkownicy</h4>
-                        <table class="table table-hover lower-font">
+                        <table class="table lower-font">
                             <thead>
                             <tr>
                                 <th></th>
@@ -67,10 +77,10 @@
                                            aria-expanded="false">
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            @if(empty($p->deleted_at))
                                             <li><a href="{{ route('admin.useredit', $p->id) }}"
                                                    class="borderless no-padding menu-blue">Edytuj</a></li>
                                             <li role="separator" class="divider"></li>
-                                            @if(empty($p->deleted_at))
                                             <li><a href="{{ route('admin.userdelete', $p->id) }}"
                                                    class="borderless no-padding menu-red">Deaktywuj konto</a></li>
                                             @else
