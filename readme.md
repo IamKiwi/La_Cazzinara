@@ -78,6 +78,9 @@ $ php artisan serve
 # Zewnętrzne biblioteki
 * Koszyk [darryldecode/cart](https://github.com/darryldecode/laravelshoppingcart)
 * Wykresy [khill/lavacharts](https://github.com/kevinkhill/lavacharts)
+* Walidacja client-side [guillaumepotier/Parsley.js](https://github.com/guillaumepotier/Parsley.js)
+* Generowanie PDF [niklasravnsborg/laravel-pdf](https://github.com/niklasravnsborg/laravel-pdf)
+
 
 # Jak używać?
 + [Rejestracja użytkownika](#rejestracja-użytkownika)
