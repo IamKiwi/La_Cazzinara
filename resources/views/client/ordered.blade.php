@@ -35,7 +35,7 @@
                                 @endforeach
                                 Całkowita kwota zamówienia: <h3>{{ $order->total_price}}</h3>
                                 Status zamówienia:
-                                <h3>
+                                <h3 id="orderStatus">
                                     {{ $order->status == 'Gotowe' ? $order->status.'. Kierowca już jedzie :)' : $order->status }}
                                 </h3>
                                 </tbody>
@@ -43,9 +43,30 @@
                             <br>
                             <br>
                         </div>
+                        <div class="text-center">
+                            <hr>
+                            <a href="{{ route('client.dashboard') }}" class="button special red">Powrót</a>
+                        </div>
                     </section>
                 </div>
             </section>
         </article>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        function checkStatus() {
+            $.ajax({
+                url: "{{ route('client.trackstatus') }}",
+                success: function(data) {
+                    $('#orderStatus').html('');
+                    $('#orderStatus').html(data.status);
+                }
+            });
+        }
+
+        window.setInterval(function(){
+            checkStatus();
+        }, 5000);
+    </script>
 @endsection

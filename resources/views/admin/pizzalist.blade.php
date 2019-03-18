@@ -69,15 +69,12 @@
                         </table>
                         <div class="text-center">
                             {!! $pizza->links() !!}
+                            <hr>
+                            <ul class="actions text-center">
+                                <li><a href="{{route('admin.addpizza')}}" class="button special green force-black">Dodaj nową pizze</a></li>
+                                <li><a href="{{ route('admin.dashboard') }}" class="button special">Powrót</a></li>
+                            </ul>
                         </div>
-                    </div>
-                </section>
-                <section>
-                    <div class="row uniform">
-                        <ul class="actions">
-                            <li><a href="{{route('admin.addpizza')}}" class="button special green">Dodaj nową pizze</a></li>
-                            <li><a href="{{ route('admin.dashboard') }}" class="button special">Powrót</a></li>
-                        </ul>
                     </div>
                 </section>
             </div>

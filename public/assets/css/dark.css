@@ -1,0 +1,99 @@
+.white-back {
+    background-image: url("../../images/dark-back.jpg") !important;
+    background-size: cover;
+    padding: 100px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #eee !important;
+}
+
+.button {
+    color: #eee !important;
+}
+
+.wrapper.style5 table th {
+    color: #eee;
+}
+
+.table-wrapper {
+    color: #eee;
+}
+
+.table th {
+    color: #eee !important;
+}
+
+.table {
+    color: #eee !important;
+}
+
+.wrapper.style5 button{
+    color: #eee;
+}
+
+.modal-content {
+    background-color: #222;
+}
+
+.modal-body {
+    color: #fff;
+}
+
+.wrapper.style5 input {
+    border: 1px #fff solid;
+}
+
+.wrapper.style5 select {
+    border: 1px #fff solid;
+}
+
+.force-black {
+    color: #000 !important;
+}
+
+.force-white {
+    color: #fff !important;
+}
+
+p {
+    color: #fff !important;
+}
+
+.wrapper.style5 input[type="text"] {
+    color: #fff !important;
+}
+
+.wrapper.style5 input[type="submit"] {
+    border: none;
+}
+
+select {
+    color: #fff !important;
+}
+
+.dark {
+    background-color: #eee;
+    color: #000 !important;
+    text-decoration: none;
+    box-shadow: none !important;
+}
+
+.dark:hover {
+    background-color: #ccc !important;
+    color: #000 !important;
+    text-decoration: none;
+    box-shadow: none !important;
+}
+
+.parsley-errors-list {
+    color: #fff !important;
+}
+
+.wrapper.style5 input[type="text"].parsley-error {
+    color: #B94A48 !important;
+}
+
+.wrapper.style5 input[type="text"].parsley-success {
+    color: #468847 !important;
+}

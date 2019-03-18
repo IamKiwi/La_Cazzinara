@@ -104,8 +104,11 @@
                     </div>
                 <div class="text-center">
                     {!! $order->links() !!}
+                    <hr>
+                    <ul class="actions text-center">
+                        <li><a href="{{ route('admin.dashboard') }}" class="button special">Powrót</a></li>
+                    </ul>
                 </div>
-                <a href="{{ route('admin.dashboard') }}" class="button special red fix-margin-top">Powrót</a>
             </div>
         </section>
     </article>

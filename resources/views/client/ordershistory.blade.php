@@ -27,7 +27,12 @@
                                 <tr>
                                     <td>{{ $o->created_at }}</td>
                                     <td>{{ $o->total_price }}</td>
-                                    <td>{{ $o->status }}</td>
+
+                                    @if($o->status !== 'Zrealizowane' and $o->status !== 'Odrzucone' and $o->status !== 'Odmówione')
+                                        <td><a href="{{ route('client.ordered') }}" class="btn-link">{{ $o->status }}</a></td>
+                                    @else
+                                        <td>{{ $o->status }}</td>
+                                    @endif
                                     <td><a href="{{ route('client.ordershistorydetails', $o->id) }}" class="btn btn-info btn-sm">Zobacz</a></td>
                                     @if($o->status === 'Zrealizowane' and empty($o->feedback[0]))
                                         <td><a href="{{ route('client.sendfeedback', $o->id) }}" class="btn btn-info btn-sm">Wystaw opinie</a></td>
@@ -45,10 +50,10 @@
                     <div class="text-center">
                         {!! $order->links() !!}
                     </div>
-                    <ul class="actions">
-                        <br>
-                        <li><a href="{{ route('client.dashboard') }}" class="button special red fix-margin-top">Powrót</a></li>
-                    </ul>
+                    <div class="text-center">
+                        <hr>
+                        <a href="{{ route('client.dashboard') }}" class="button special red">Powrót</a>
+                    </div>
                 </div>
             </div>
         </section>

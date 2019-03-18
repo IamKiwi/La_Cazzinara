@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Session;
 use Khill\Lavacharts\Lavacharts;
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 class AdminController extends Controller
 {
@@ -24,7 +25,6 @@ class AdminController extends Controller
     {
         return view('admin.adminpanel');
     }
-
     /********************************************** Zarządzanie pizzami **********************************************/
     public function getPizzaList()
     {
@@ -159,10 +159,9 @@ class AdminController extends Controller
         return view('admin.pizzaedit')->with('pizza', $pizza);
     }
     /********************************************** /Zarządzanie pizzami *********************************************/
-
     public function getUserList()
     {
-        $users = User::withTrashed()->get();
+        $users = User::withTrashed()->paginate(5);
         return view('admin.userlist')->with('users', $users);
     }
 
@@ -181,7 +180,7 @@ class AdminController extends Controller
             where('name', 'like', $name.'%')->
             where('surname', 'like', $surname.'%')->
             where('address', 'like', '%'.$address.'%')->
-            where('phone_number', 'like', $phone.'%')->paginate(5);
+            where('phone_number', 'like', $phone.'%')->orderBy('id', 'asc')->paginate(5);
         }
         else if($searchParam === 'trashed')
         {
@@ -189,7 +188,7 @@ class AdminController extends Controller
             where('name', 'like', $name.'%')->
             where('surname', 'like', $surname.'%')->
             where('address', 'like', '%'.$address.'%')->
-            where('phone_number', 'like', $phone.'%')->onlyTrashed()->paginate(5);
+            where('phone_number', 'like', $phone.'%')->onlyTrashed()->orderBy('id', 'asc')->paginate(5);
         }
         else
         {
@@ -197,7 +196,7 @@ class AdminController extends Controller
             where('name', 'like', $name.'%')->
             where('surname', 'like', $surname.'%')->
             where('address', 'like', '%'.$address.'%')->
-            where('phone_number', 'like', $phone.'%')->withTrashed()->paginate(5);
+            where('phone_number', 'like', $phone.'%')->withTrashed()->orderBy('id', 'asc')->paginate(5);
         }
         $request->flash();
         return view('admin.userlist')->with('users', $users);
@@ -267,7 +266,7 @@ class AdminController extends Controller
         $user->delete();
         Session::flash('success', 'Konto użytkownika zostało deaktywowane');
 
-        return redirect()->route('admin.userlist');
+        return redirect()->back();
     }
 
     public function getRestoreUser($id)
@@ -275,7 +274,7 @@ class AdminController extends Controller
         User::withTrashed()->find($id)->restore();
         Session::flash('success', 'Konto użytkownika zostało przywrócone');
 
-        return redirect()->route('admin.userlist');
+        return redirect()->back();
     }
     /******************************************** Zarządzanie zamówieniami ********************************************/
     public function getOrdersTrack()
@@ -373,7 +372,6 @@ class AdminController extends Controller
         return redirect()->route('admin.orderstrack');
     }
     /******************************************** /Zarządzanie zamówieniami *******************************************/
-
     public function getFinances()
     {
         $lossStatuses = ['Odmówione', 'Odrzucone'];
@@ -453,6 +451,7 @@ class AdminController extends Controller
         }
 
         \Lava::BarChart('Pizzas', $moo, [
+            'events' => ['ready' => 'getImageCallBack'],
             'title' => 'Najczęściej kupowane pizze',
             'vAxis' => ['format' => ''],
             'hAxis' => ['format' => '', 'ticks' => [0, 5, 10, 15, 20, 25, 30, 35, 40]],
@@ -462,6 +461,7 @@ class AdminController extends Controller
                 'fontSize' => 14
             ]
         ]);
+
         //=============================================================================================================
         $ordersStats = \Lava::DataTable();
         $ordersStats->addStringColumn('Zamówienie')
@@ -470,6 +470,7 @@ class AdminController extends Controller
                     ->addRow(['Zrealizowane', $accepted]);
 
         \Lava::BarChart('OStats', $ordersStats, [
+            'events' => ['ready' => 'getImageCallBack2'],
             'title' => 'Status zamówień',
             'vAxis' => ['format' => ''],
             'hAxis' => ['format' => '', 'ticks' => [0, 5, 10, 15, 20, 25, 30, 35, 40]],
@@ -506,6 +507,7 @@ class AdminController extends Controller
 
         \Lava::BarChart('Users', $ma, [
             'title' => 'Zamówienia użytkowników',
+            'events' => ['ready' => 'getImageCallBack3'],
             'vAxis' => ['format' => ''],
             'hAxis' => ['format' => '', 'ticks' => [0, 5, 10, 15, 20, 25, 30, 35, 40]],
             'bars' => 'horizontal',
@@ -559,6 +561,7 @@ class AdminController extends Controller
 
         \Lava::BarChart('Feed', $a, [
             'title' => 'Opinie o pizzach',
+            'events' => ['ready' => 'getImageCallBack4'],
             'vAxis' => ['format' => ''],
             'hAxis' => ['format' => '', 'ticks' => [0, 5, 10, 15, 20, 25, 30, 35, 40]],
             'bars' => 'horizontal',
@@ -567,7 +570,48 @@ class AdminController extends Controller
                 'fontSize' => 14
             ]
         ]);
+        /*************************************************************************************************************/
+        $feedbackStats = [];
+        foreach(['positive', 'neutral', 'negative'] as $g)
+            $feedbackStats [] = Feedback::where('grade', $g)->count();
+        $fs = \Lava::DataTable();
+        $fs->addStringColumn('Opinion type')
+           ->addNumberColumn('Amount')
+           ->addRow(['Pozytywne', $feedbackStats[0]])
+           ->addRow(['Negatywne', $feedbackStats[2]])
+           ->addRow(['Neutralne', $feedbackStats[1]]);
+
+        \Lava::PieChart('Opinions', $fs, [
+            'title' => 'Opinie',
+            'titleTextStyle' => [
+                'color'    => '#eb6b2c',
+                'fontSize' => 14
+            ],
+            'events' => ['ready' => 'getImageCallBack5'],
+        ]);
 
         return view('admin.stats');
     }
+    /********************************************** /Generowanie raportów *********************************************/
+    public function generateFeedbackReport()
+    {
+        $feedback = Feedback::withTrashed()->orderBy('created_at', 'desc')->get();
+
+        $pdf = Pdf::loadView('reports.feedback', ['feedback' => $feedback]);
+        return $pdf->stream('feedbacks.pdf');
+    }
+
+    public function generateStatsReport(Request $request)
+    {
+        $imgURIs = [];
+        $imgURIs[0] = $request->chartImg;
+        $imgURIs[1] = $request->chartImg2;
+        $imgURIs[2] = $request->chartImg3;
+        $imgURIs[3] = $request->chartImg4;
+        $imgURIs[4] = $request->chartImg5;
+
+        $pdf = Pdf::loadView('reports.stats', ['stats' => $imgURIs]);
+        return $pdf->stream('stats.pdf');
+    }
+
 }

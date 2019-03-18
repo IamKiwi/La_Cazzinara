@@ -43,6 +43,9 @@
                     </form>
                     <div class="table-wrapper">
                         <h4>Opinie wystawione przez użytkowników</h4>
+                        <hr>
+                            <a href="{{ route('admin.generatefpdf') }}" class="button special white dark btn-block fix-margin-top">Generuj Raport</a>
+                        <hr>
                         <p>Mamy {{ $fs[0] }}
                             @if($fs[0] == 1) pozytywną @endif
                             @if($fs[0] > 1 and $fs[0] < 5) pozytywne, @endif

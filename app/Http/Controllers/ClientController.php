@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Nexmo\Response;
 use Session;
 
 class ClientController extends Controller
@@ -183,13 +184,13 @@ class ClientController extends Controller
                                        $request->quantity, array('size' => $rozmiar,
                                                'ingredients' => $pizza->ingredients,
                                                'id_pizza' => $pizza->id));
-        return redirect()->route('client.orderonline');
+        return redirect()->back();
     }
 
     public function getRemoveFromCart($pid)
     {
         Cart::session(Auth::id())->remove($pid);
-        return redirect()->route('client.orderonline');
+        return redirect()->back();
     }
 
     public function getCancelCart()
@@ -256,6 +257,12 @@ class ClientController extends Controller
         return view('client.ordered')->with('order', $order)
                                            ->with('orderitem', $orderitems)
                                            ->with('pizza', $pizza);
+    }
+
+    public function getAjaxOrderStatus()
+    {
+        $order = Order::where('id_user', Auth::id())->orderBy('created_at', 'desc')->first();
+        return response()->json($order);
     }
 
     public function getOrdersHistory()

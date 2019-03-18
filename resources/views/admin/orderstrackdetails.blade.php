@@ -35,8 +35,8 @@
                         </table>
                     </div>
                 <div class="12u$">
-                    <ul class="actions">
-                        <br>
+                    <hr>
+                    <ul class="actions text-center">
                         <li><a href="{{ redirect()->back()->getTargetUrl() }}" class="button special red fix-margin-top">Powrót</a></li>
                     </ul>
                 </div>

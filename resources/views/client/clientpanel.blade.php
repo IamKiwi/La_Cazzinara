@@ -18,10 +18,10 @@
                         <div class="row">
                             <div class="12u">
                                 <ul class="actions vertical">
-                                    <li><a href="{{ route('client.orderonline') }}" class="button fit">Zamów</a></li>
-                                    <li><a href="{{ route('client.edit')}}" class="button fit">Edytuj Profil</a></li>
-                                    <li><a href="{{ route('client.history') }}" class="button fit">Historia zamówień</a></li>
-                                    <li><a href="{{ route('logout') }}" class="button fit">Wyloguj</a></li>
+                                    <li><a href="{{ route('client.orderonline') }}" class="button dark fit">Zamów</a></li>
+                                    <li><a href="{{ route('client.edit')}}" class="button dark fit">Edytuj Profil</a></li>
+                                    <li><a href="{{ route('client.history') }}" class="button dark fit">Historia zamówień</a></li>
+                                    <li><a href="{{ route('logout') }}" class="button dark fit">Wyloguj</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -59,6 +59,9 @@ Route::prefix('admin')->group(function ()
     Route::get('feedbacks/{id}', 'AdminController@getSeeFeedback')->name('admin.seefeedback');
 
     Route::get('stats', 'AdminController@getStats')->name('admin.stats');
+
+    Route::get('feedbacksreport', 'AdminController@generateFeedbackReport')->name('admin.generatefpdf');
+    Route::post('statsreport', 'AdminController@generateStatsReport')->name('admin.generatespdf');
 });
 
 Route::get('/home', 'ClientController@getClientPanel')->name('client.dashboard');
@@ -79,6 +82,7 @@ Route::prefix('client')->group(function()
     Route::get('/doorder', 'ClientController@getDoOrder')->name('client.doorder');
     Route::get('/confirmorder', 'ClientController@getConfirmOrder')->name('client.confirmorder');
     Route::get('/orderconfirmed', 'ClientController@getOrderConfirmed')->name('client.ordered');
+    Route::get('/orderstatus', 'ClientController@getAjaxOrderStatus')->name('client.trackstatus');
 
     Route::get('/ordershistory', 'ClientController@getOrdersHistory')->name('client.history');
     Route::get('/orderdetails/{id}', 'ClientController@getOrderDetails')->name('client.ordershistorydetails');
@@ -87,5 +91,8 @@ Route::prefix('client')->group(function()
     Route::post('/savefeedback', 'ClientController@postSaveFeedback')->name('client.savefeedback');
     Route::get('/seefeedback/{id}', 'ClientController@getSeeFeedback')->name('client.seefeedback');
 });
+
+Route::get('/dark', 'PagesController@getSetDarkMode')->name('pages.dark');
+Route::get('/light', 'PagesController@getSetLightMode')->name('pages.light');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

@@ -19,7 +19,7 @@
                         <h4>Wystawianie opinii</h4>
                         <div class="row uniform">
                             <div class="12u 12u$(xsmall)">
-                                <label for="grade">Rodzaj oceny</label>
+                                <label for="grade" class="force-white">Rodzaj oceny</label>
                                 <select name="grade">
                                     <option value="positive" selected>Pozytywna</option>
                                     <option value="neutral">Neutralna</option>
@@ -27,21 +27,21 @@
                                 </select>
                             </div>
                             <div class="12u 12u$(xsmall)">
-                                <label for="opinion_type">Rodzaj opinii</label>
+                                <label for="opinion_type" class="force-white">Rodzaj opinii</label>
                                 <select name="opinion_type">
                                     <option value="true" selected>Publiczny</option>
                                     <option value="false">Prywatny</option>
                                 </select>
                             </div>
                             <div class="12u 12u$(xsmall)">
-                                <label for="feedback">Wiadomość</label>
-                                <textarea name="feedback" placeholder="Treść" rows="6" style="resize: none;"></textarea>
+                                <label for="feedback" class="force-white">Wiadomość</label>
+                                <textarea name="feedback" placeholder="Treść" rows="6" style="resize: none;" class="force-white"></textarea>
                                 <input type="hidden" name="oid" value="{{ $oid }}">
                             </div>
                             <div class="12u$">
                                 <ul class="actions">
                                     <br>
-                                    <li><input type="submit" value="Wystaw opinię" class="button special green" /></li>
+                                    <li><input type="submit" value="Wystaw opinię" class="button special green dark" /></li>
                                     <li><a href="{{ route('client.history') }}" class="button special red fix-margin-top">Anuluj</a></li>
                                 </ul>
                             </div>

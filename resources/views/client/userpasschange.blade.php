@@ -19,18 +19,18 @@
                         <h4>Zmiana hasła</h4>
                         <div class="row uniform">
                             <div class="12u$">
-                                <input type="password" name="current-password" value="" placeholder="Obecne hasło"/>
+                                <input type="password" name="current-password" value="" placeholder="Obecne hasło" class="force-white"/>
                             </div>
                             <div class="12u$">
-                                <input type="password" name="new-password" value="" placeholder="Nowe hasło"/>
+                                <input type="password" name="new-password" value="" placeholder="Nowe hasło" class="force-white"/>
                             </div>
                             <div class="12u$">
-                                <input type="password" name="new-password_confirmation" value="" placeholder="Potwierdź hasło"/>
+                                <input type="password" name="new-password_confirmation" value="" placeholder="Potwierdź hasło" class="force-white"/>
                             </div>
                             <div class="12u$">
                                 <ul class="actions">
-                                    <li><input type="submit" value="Zmień hasło" class="button special green"/></li>
-                                    <li><input type="reset" value="Wyczyść"/></li>
+                                    <li><input type="submit" value="Zmień hasło" class="button special green dark"/></li>
+                                    <li><input type="reset" value="Wyczyść" class="force-white"/></li>
                                     <li><a href="{{ route('client.edit') }}" class="button special red fix-margin-top">Powrót</a></li>
                                 </ul>
                             </div>

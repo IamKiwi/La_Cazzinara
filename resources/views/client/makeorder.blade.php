@@ -39,7 +39,7 @@
                             </table>
                             {{--{if $numOfPizzas > 0}--}}
                             <br>
-                            <a href="{{ route('client.doorder') }}" class="button special green">Zamów</a>
+                            <a href="{{ route('client.doorder') }}" class="button special green dark">Zamów</a>
                             <a href="{{ route('client.cancelcart') }}" class="button special red">Anuluj</a>
                             <br>
                         </div>
@@ -97,7 +97,7 @@
                                                 <input type="hidden" value="{{ $p->id }}" name="p_id"/>
                                             </td>
                                             <td>
-                                                <input type="submit" value="Dodaj"/>
+                                                <input type="submit" value="Dodaj" class="force-white"/>
                                             </td>
                                         </tr>
                                     </form>

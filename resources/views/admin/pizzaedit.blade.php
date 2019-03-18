@@ -38,7 +38,7 @@
                             <div class="12u$">
                                 <ul class="actions">
                                     <br>
-                                    <li><input type="submit" value="Zapisz" class="button special green" /></li>
+                                    <li><input type="submit" value="Zapisz" class="button special green force-black" /></li>
                                     <li><input type="reset" value="Wyczyść" class="button"/></li>
                                     <li><a href="{{route('admin.pizzalist')}}" class="button special fix-margin-top">Powrót</a></li>
                                 </ul>

@@ -26,8 +26,10 @@
                     <h4>Bilans</h4>
                     <p>Zyski minus straty</p>
                     <h2 style="color: dodgerblue">{{ number_format($balance, 2, '.', ' ')}}</h2>
-
-                    <a href="{{ route('admin.dashboard') }}" class="button special red fix-margin-top">Powrót</a>
+                    <hr>
+                    <ul class="actions text-center">
+                        <li><a href="{{ route('admin.dashboard') }}" class="button special">Powrót</a></li>
+                    </ul>
                 </section>
             </div>
         </section>

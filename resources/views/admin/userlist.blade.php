@@ -108,10 +108,12 @@
                     </div>
                 </section>
                 <section>
-                    <div class="row uniform">
-                        <ul class="actions">
-                            <br>
-                            <li><a href="/admin" class="button special">Powrót</a></li>
+
+                    <div class="text-center">
+                        {!! $users->appends(Request::all())->links() !!}
+                        <hr>
+                        <ul class="actions text-center">
+                            <li><a href="{{ route('admin.dashboard') }}" class="button special">Powrót</a></li>
                         </ul>
                     </div>
                 </section>

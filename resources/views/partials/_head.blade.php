@@ -11,10 +11,14 @@
 
 <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 <link rel="stylesheet" href="{{ URL::asset('assets/css/main.css') }}" />
-
 <link rel="stylesheet" href="{{ URL::asset('assets/css/override.css') }}" />
+
 <!--[if lte IE 8]><link rel="stylesheet" href="{{ URL::asset('assets/css/ie8.css') }}" /><![endif]-->
 <!--[if lte IE 9]><link rel="stylesheet" href="{{ URL::asset('assets/css/ie9.css') }}" /><![endif]-->
 
 <link rel="stylesheet" href="{{ URL::asset('assets/css/carouseria.min.css') }}" />
+<link rel="stylesheet" href="{{ URL::asset('css/parsley.css') }}" />
 
+@if (Cookie::get('theme') !== null && Cookie::get('theme') === 'dark')
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/dark.css') }}" />
+@endif

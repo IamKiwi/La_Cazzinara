@@ -21,15 +21,15 @@
                         <h4>Logowanie</h4>
                         <div class="row uniform">
                             <div class="12u$">
-                                <input type="email" name="email" id="email" value="" placeholder="E-Mail"/>
+                                <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="E-Mail" class="force-white"/>
                             </div>
                             <div class="12u$">
-                                <input type="password" name="password" id="password" value="" placeholder="Hasło"/>
+                                <input type="password" name="password" id="password" value="" placeholder="Hasło" class="force-white"/>
                             </div>
                             <div class="12u$">
                                 <ul class="actions">
-                                    <li><input type="submit" value="Zaloguj się" class="button special green"/></li>
-                                    <li><input type="reset" value="Wyczyść"/></li>
+                                    <li><input type="submit" value="Zaloguj się" class="button special green force-black"/></li>
+                                    <li><input type="reset" value="Wyczyść" class="force-white"/></li>
                                 </ul>
                             </div>
                         </div>

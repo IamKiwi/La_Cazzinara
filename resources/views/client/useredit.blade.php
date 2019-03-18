@@ -45,7 +45,7 @@
                                 <input type="text" name="date_of_birth" value="{{ $user->date_of_birth }}" placeholder="Data urodzenia (RRRR/MM/DD)" />
                             </div>
                             <div class="6u 12u$(xsmall)">
-                                <input type="email" name="email" value="{{ $user->email }}" placeholder="Mail" />
+                                <input type="email" name="email" value="{{ $user->email }}" placeholder="Mail" class="force-white" />
                             </div>
                             <div class="6u 12u$(xsmall)">
                                 <input type="text" name="phone_number" value="{{ $user->phone_number }}" placeholder="Nr telefonu" />
@@ -70,8 +70,8 @@
                             <div class="12u$">
                                 <ul class="actions">
                                     <br>
-                                    <li><input type="submit" value="Aktualizuj" class="button special green" /></li>
-                                    <li><input type="reset" value="Wyczyść" /></li>
+                                    <li><input type="submit" value="Aktualizuj" class="button special green dark" /></li>
+                                    <li><input type="reset" value="Wyczyść" class="force-white"/></li>
                                     <li><a href="{{ route('client.dashboard') }}" class="button special red fix-margin-top">Anuluj</a></li>
                                 </ul>
                             </div>

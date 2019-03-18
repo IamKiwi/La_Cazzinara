@@ -42,7 +42,7 @@
                                 </tbody>
                             </table>
                             <br>
-                            <a href="{{ route('client.confirmorder') }}" class="button special green">Zamawiam</a>
+                            <a href="{{ route('client.confirmorder') }}" class="button special green dark">Zamawiam</a>
                             <a href="{{ route('client.cancelcart') }}" class="button special red">Rozmyśliłem się</a>
                             <br>
                         </div>
@@ -50,4 +50,5 @@
                 </div>
             </section>
         </article>
+    </div>
 @endsection

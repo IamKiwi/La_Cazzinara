@@ -160,7 +160,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
-        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class
+        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class
+
     ],
 
     /*
@@ -210,7 +212,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
-        'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class
+        'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
     ],
 
 ];
